@@ -14,6 +14,7 @@
 #import "ListsViewController.h"
 #import "RecipeListViewController.h"
 #import "AddRecipeViewController.h"
+#import "GroceryList.h"
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -72,6 +73,13 @@
     }
     [ self.navigationController pushViewController:self.addRecipeViewController animated:YES];
     [self dismissModalViewControllerAnimated:NO];
+}
+-(void)listCompleted:(NSMutableArray*)list
+{
+    for(int i = 0; i < list.count; i++)
+    {
+        GroceryItem *item = list[i];
+    }
 }
 
 #pragma mark - Table View
@@ -165,11 +173,10 @@
     //Create list view
     else if(index == 1)
     {
-        if (!self.createListViewController)
-        {
-            self.createListViewController = [[CreateListViewController alloc] initWithNibName:@"CreateListViewController" bundle:nil];
-            self.createListViewController.delegate = self;
-        }
+        if(self.createListViewController) self.createListViewController = NULL;
+
+        self.createListViewController = [[CreateListViewController alloc] initWithNibName:@"CreateListViewController" bundle:nil];
+        self.createListViewController.delegate = self;
         [ self presentViewController:self.createListViewController animated:YES completion:^{
             //Blah
         }];
@@ -181,7 +188,7 @@
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No lists entered"
                                                             message:@"You must enter a list into the app before you can view one.  Please go to \"Create List\" and enter your list."
-                                                           delegate:nil
+                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];

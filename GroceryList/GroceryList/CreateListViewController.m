@@ -7,6 +7,8 @@
 //
 
 #import "CreateListViewController.h"
+#import "GroceryList.h"
+#import "GroceryItem.h"
 
 @interface CreateListViewController ()
 {
@@ -17,6 +19,7 @@
 @implementation CreateListViewController
 @synthesize delegate;
 int rows = 0;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,41 +51,33 @@ int rows = 0;
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 -(IBAction)cancelPressed:(id)sender
 {
+    rows = 0;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)savePressed:(id)sender;
 {
+    rows = 0;
     [self dismissModalViewControllerAnimated:YES];
+    if([delegate respondsToSelector:@selector(listCompleted:)])
+    {
+        //send the delegate function with the amount entered by the user
+        [delegate listCompleted:arrayOfItems];
+    }
 }
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(section == 1)
+    {
+        return 1;
+    }
     return rows;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UIView* footerView  = [[UIView alloc] init];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button setFrame:CGRectMake(10, 3, 300, 30)];
-    
-    [button setTitle:@"Add Item" forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
-
-    button.userInteractionEnabled=YES;
-    
-    [button addTarget:self action:@selector(addItem:) forControlEvents:UIControlEventTouchUpInside];
-    [footerView addSubview:button];
-    [button becomeFirstResponder];
-    
-    return footerView;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,11 +87,26 @@ int rows = 0;
     UITextField *inputField;
     inputField.delegate = self;
     inputField.returnKeyType = UIReturnKeyDone;
-    [inputField resignFirstResponder];
     
     if(cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
+    }
+    
+    if(indexPath.section == 1)
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [button setFrame:CGRectMake(10, 0, 300, 46)];
+        
+        [button setTitle:@"Add Item" forState:UIControlStateNormal];
+        [button.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
+        
+        button.userInteractionEnabled=YES;
+        
+        [button addTarget:self action:@selector(addItem:) forControlEvents:UIControlEventTouchUpInside];
+        [button becomeFirstResponder];
+        [cell addSubview:button];
+        return cell;
     }
     
     if(indexPath.row == rows-1)
@@ -107,29 +117,24 @@ int rows = 0;
         
         inputField = [[UITextField alloc] initWithFrame:CGRectMake(12,12,185,30)];
         inputField.adjustsFontSizeToFitWidth = YES;
+        [inputField setTag:indexPath.row+1];
         
         [cell addSubview:inputField];
     }
-    inputField.keyboardType = UIKeyboardTypeDefault;
+    else if(indexPath.row == rows-2)
+    {
+        UIView* itemView = [cell viewWithTag:indexPath.row+1];
+        UITextView* textView = (UITextView*)itemView;
+        GroceryItem* item;
+        item = [[GroceryItem alloc] initWithName:textView.text];
+        [arrayOfItems addObject:item];
+    }
     return cell;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    CGRect textFieldRect =
-    [self.view.window convertRect:textField.bounds fromView:textField];
-    CGRect viewRect =
-    [self.view.window convertRect:self.view.bounds fromView:self.view];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 30;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

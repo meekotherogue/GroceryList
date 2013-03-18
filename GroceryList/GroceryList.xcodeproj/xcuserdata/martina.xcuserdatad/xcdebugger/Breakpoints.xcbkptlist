@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/MasterViewController.m"
-         timestampString = "384064306.212028"
+         timestampString = "385278980.302499"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
+         startingLineNumber = "104"
+         endingLineNumber = "104"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/MasterViewController.m"
-         timestampString = "384062992.681311"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/MasterViewController.m"
-         timestampString = "384064306.212028"
+         timestampString = "385278980.302499"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "103"
-         endingLineNumber = "103"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/MasterViewController.m"
-         timestampString = "384064306.212028"
+         timestampString = "385278980.302499"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "174"
-         endingLineNumber = "174"
+         startingLineNumber = "183"
+         endingLineNumber = "183"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,89 +60,89 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "269"
-         endingLineNumber = "269">
+         startingLineNumber = "274"
+         endingLineNumber = "274">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "263"
-         endingLineNumber = "263">
+         startingLineNumber = "268"
+         endingLineNumber = "268">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "232"
-         endingLineNumber = "232">
+         startingLineNumber = "237"
+         endingLineNumber = "237">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "177"
-         endingLineNumber = "177">
+         startingLineNumber = "182"
+         endingLineNumber = "182">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "205"
-         endingLineNumber = "205">
+         startingLineNumber = "210"
+         endingLineNumber = "210">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "164"
-         endingLineNumber = "164">
+         startingLineNumber = "169"
+         endingLineNumber = "169">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "194"
-         endingLineNumber = "194">
+         startingLineNumber = "199"
+         endingLineNumber = "199">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385269378.993785"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "-tableView:viewForFooterInSection:"
+         startingLineNumber = "50"
+         endingLineNumber = "50"
+         landmarkName = "-addItem:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -150,7 +150,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385269378.993785"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "47"
@@ -163,24 +163,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385269378.993785"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "-addItem:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385269378.993785"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "36"
-         endingLineNumber = "36"
+         startingLineNumber = "39"
+         endingLineNumber = "39"
          landmarkName = "@implementation CreateListViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -189,11 +176,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385269378.993785"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -202,11 +189,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "103"
-         endingLineNumber = "103"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -215,11 +202,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385278754.851908"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "102"
-         endingLineNumber = "102"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -228,11 +215,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/MasterViewController.m"
-         timestampString = "384063008.107755"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "-recipeEntered"
          landmarkType = "5">
       </FileBreakpoint>
@@ -254,51 +241,155 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/MasterViewController.m"
-         timestampString = "384063147.783196"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
          landmarkName = "-recipeEntered"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385269900.410529"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "11"
-         endingLineNumber = "11"
-         landmarkName = "@interface CreateListViewController"
-         landmarkType = "2">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385269949.317394"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "12"
-         endingLineNumber = "12"
+         startingLineNumber = "13"
+         endingLineNumber = "13"
          landmarkName = "@interface CreateListViewController()"
          landmarkType = "2">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/CreateListViewController.m"
-         timestampString = "385270565.684863"
+         timestampString = "385277061.061409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "124"
-         endingLineNumber = "124"
-         landmarkName = "-textFieldDidBeginEditing:"
+         startingLineNumber = "14"
+         endingLineNumber = "14"
+         landmarkName = "@interface CreateListViewController()"
+         landmarkType = "2">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
+         landmarkName = "-textFieldShouldReturn:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/CreateListViewController.m"
+         timestampString = "385278754.851908"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/MasterViewController.m"
+         timestampString = "385278946.086971"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "-listCompleted:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
