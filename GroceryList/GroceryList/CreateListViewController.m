@@ -12,14 +12,14 @@
 
 @interface CreateListViewController ()
 {
-    NSMutableArray* arrayOfItems;
+    GroceryList* arrayOfItems;
 }
 @end
 
 @implementation CreateListViewController
 @synthesize delegate;
-int rows = 0;
-
+int _rows = 0;
+UITextField *_nameEntered;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +34,7 @@ int rows = 0;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    arrayOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+    arrayOfItems = [[GroceryList alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +45,7 @@ int rows = 0;
 
 - (void)addItem:(id)sender;
 {
-    rows ++;
+    _rows++;
     [self.tableView reloadData];
 }
 
@@ -56,20 +56,38 @@ int rows = 0;
 
 -(IBAction)cancelPressed:(id)sender
 {
-    rows = 0;
+    _rows = 0;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)savePressed:(id)sender;
 {
-    rows = 0;
-    [self dismissModalViewControllerAnimated:YES];
-    if([delegate respondsToSelector:@selector(listCompleted:)])
-    {
-        //send the delegate function with the amount entered by the user
-        [delegate listCompleted:arrayOfItems];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter" message:@"Enter the name for this list:" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Ok", nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    _nameEntered = [alertView textFieldAtIndex:0];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        NSLog(@"Cancel Tapped.");
+    }
+    else if (buttonIndex == 1) {
+        _rows = 0;
+        [self dismissModalViewControllerAnimated:YES];
+        if([delegate respondsToSelector:@selector(listCompleted:)])
+        {
+            //send the delegate function with the amount entered by the user
+            if(![_nameEntered.text isEqualToString:@""])
+            {
+                arrayOfItems.name = _nameEntered.text;
+            }
+            [delegate listCompleted:arrayOfItems];
+        }
     }
 }
+
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -77,7 +95,7 @@ int rows = 0;
     {
         return 1;
     }
-    return rows;
+    return _rows;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,7 +127,7 @@ int rows = 0;
         return cell;
     }
     
-    if(indexPath.row == rows-1)
+    if(indexPath.row == _rows-1)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -121,13 +139,13 @@ int rows = 0;
         
         [cell addSubview:inputField];
     }
-    else if(indexPath.row == rows-2)
+    else if(indexPath.row == _rows-2)
     {
         UIView* itemView = [cell viewWithTag:indexPath.row+1];
         UITextView* textView = (UITextView*)itemView;
         GroceryItem* item;
         item = [[GroceryItem alloc] initWithName:textView.text];
-        [arrayOfItems addObject:item];
+        [arrayOfItems addItem:item];
     }
     return cell;
 }
@@ -139,7 +157,6 @@ int rows = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
 }
 

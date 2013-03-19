@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GroceryList.h"
 @protocol CreateListDelegate
 @required
--(void)listCompleted:(NSMutableArray*)items;
+-(void)listCompleted:(GroceryList*)items;
 
 @end
 

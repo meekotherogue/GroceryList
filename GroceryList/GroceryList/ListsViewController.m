@@ -7,13 +7,14 @@
 //
 
 #import "ListsViewController.h"
+#import "GroceryList.h"
 
 @interface ListsViewController ()
 
 @end
 
 @implementation ListsViewController
-
+NSIndexPath* _currentSelection;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //self.clearsSelectionOnViewWillAppear = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +39,7 @@
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 50;
+    return self.allLists.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -50,7 +52,8 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
     }
-    
+    GroceryList* list = self.allLists[indexPath.row];
+    cell.textLabel.text = list.name;
     
     return cell;
 }
@@ -62,6 +65,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
+	//[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(_currentSelection != nil)
+    {
+        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:_currentSelection];
+        currentCell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    _currentSelection = indexPath;
 }
 @end

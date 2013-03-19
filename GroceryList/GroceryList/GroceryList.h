@@ -10,9 +10,12 @@
 #import "GroceryItem.h"
 
 @interface GroceryList : NSObject
-@property NSMutableDictionary* listOfItems;
+@property NSMutableArray* listOfItems;
 @property NSString* name;
-@property NSDate* dateCreated;
+@property NSString* dateCreated;
 
+-(id)init;
 -(id)initWithName:(NSString*)name;
+
+-(void)addItem:(GroceryItem*)item;
 @end

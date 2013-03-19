@@ -18,8 +18,9 @@
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
-    NSArray* tableData;
-    NSArray* currentList;
+    NSArray* _tableData;
+    GroceryList* _currentList;
+    NSMutableArray* _allLists;
 }
 @end
 
@@ -41,7 +42,8 @@
     
 	// Do any additional setup after loading the view, typically from a nib.
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TitlePage" ofType:@"plist"];
-    tableData = [NSArray arrayWithContentsOfFile:filePath];
+    _tableData = [NSArray arrayWithContentsOfFile:filePath];
+    _allLists = [[NSMutableArray alloc] initWithCapacity:0];
     
     //TESTLIST //Actually look in memory
     //currentList = [NSArray alloc];
@@ -74,12 +76,11 @@
     [ self.navigationController pushViewController:self.addRecipeViewController animated:YES];
     [self dismissModalViewControllerAnimated:NO];
 }
--(void)listCompleted:(NSMutableArray*)list
+
+-(void)listCompleted:(GroceryList*)list
 {
-    for(int i = 0; i < list.count; i++)
-    {
-        GroceryItem *item = list[i];
-    }
+    _currentList = list;
+    [_allLists addObject:list];
 }
 
 #pragma mark - Table View
@@ -107,7 +108,7 @@
     }
 
     NSInteger index = (indexPath.section * 1) + indexPath.row;
-    NSString *object = tableData[index];
+    NSString *object = _tableData[index];
     NSString* label = [object description];
     cell.textLabel.text = label;
 
@@ -153,7 +154,7 @@
     //Show current list
     if(index == 0)
     {
-        if(currentList == nil)
+        if(_currentList == nil)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No lists entered"
                                                             message:@"You must enter a list into the app before you can view one.  Please go to \"Create List\" and enter your list."
@@ -163,11 +164,10 @@
             [alert show];
             return;
         }
-        if (!self.currentListViewController)
-        {
-            self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
-            self.currentListViewController.delegate = self;
-        }
+
+        self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
+        self.currentListViewController.delegate = self;
+        self.currentListViewController.currentList = _currentList;
         [ self.navigationController pushViewController:self.currentListViewController animated:YES];
     }
     //Create list view
@@ -184,7 +184,7 @@
     //View all lists
     else if(index == 2)
     {
-        if(currentList == nil)
+        if(_currentList == nil)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No lists entered"
                                                             message:@"You must enter a list into the app before you can view one.  Please go to \"Create List\" and enter your list."
@@ -194,11 +194,10 @@
             [alert show];
             //return;
         }
-        if (!self.listViewController)
-        {
-            self.listViewController = [[ListsViewController alloc] initWithNibName:@"ListsViewController" bundle:nil];
-            self.listViewController.delegate = self;
-        }
+
+        self.listViewController = [[ListsViewController alloc] initWithNibName:@"ListsViewController" bundle:nil];
+        self.listViewController.delegate = self;
+        self.listViewController.allLists = _allLists;
         [ self presentViewController:self.listViewController animated:YES completion:^{
             //Blah
         }];

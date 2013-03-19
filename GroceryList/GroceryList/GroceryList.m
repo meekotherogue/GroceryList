@@ -16,8 +16,31 @@
     if(self != nil)
     {
         self.name = name;
-        self.listOfItems = [[NSMutableDictionary alloc] initWithCapacity:0];
+        self.listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+        self.dateCreated = [self getDate];
     }
     return (self);
+}
+-(id)init
+{
+    self=[super init];
+    
+    if(self != nil)
+    {
+        self.listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+        self.dateCreated = [self getDate];
+        self.name = [self getDate];
+    }
+    return (self);
+}
+-(void)addItem:(GroceryItem *)item
+{
+    [self.listOfItems addObject:item];
+}
+-(NSString*)getDate
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [dateFormatter stringFromDate:[NSDate date]];
 }
 @end
