@@ -14,6 +14,8 @@
 @end
 
 @implementation ListsViewController
+@synthesize delegate;
+
 NSIndexPath* _currentSelection;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +30,6 @@ NSIndexPath* _currentSelection;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //self.clearsSelectionOnViewWillAppear = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,7 +47,6 @@ NSIndexPath* _currentSelection;
 {
     static NSString* cellID = @"Cell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    UITextField *inputField;
     
     if(cell == nil)
     {
@@ -61,12 +61,17 @@ NSIndexPath* _currentSelection;
 -(IBAction)backPressed:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
+    if([delegate respondsToSelector:@selector(listSelected:)])
+    {
+        if(_currentSelection != nil)
+        {
+            [delegate listSelected:_currentSelection.row];
+        }
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     

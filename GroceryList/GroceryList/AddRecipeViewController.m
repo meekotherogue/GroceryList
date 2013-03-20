@@ -13,6 +13,7 @@
 @end
 
 @implementation AddRecipeViewController
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

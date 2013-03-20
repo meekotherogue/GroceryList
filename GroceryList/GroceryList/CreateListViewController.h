@@ -15,11 +15,14 @@
 @end
 
 @interface CreateListViewController : UIViewController <UITextFieldDelegate>
+{
+    IBOutlet UITextField* addItemText;
+    IBOutlet UIButton* addItemButton;
+}
 @property(nonatomic,assign)id delegate;
-
-
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
-- (void)addItem: (id)sender;
+
 -(IBAction)cancelPressed:(id)sender;
 -(IBAction)savePressed:(id)sender;
+-(IBAction)addPressed:(id)sender;
 @end

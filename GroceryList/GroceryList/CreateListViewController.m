@@ -18,6 +18,7 @@
 
 @implementation CreateListViewController
 @synthesize delegate;
+
 int _rows = 0;
 UITextField *_nameEntered;
 
@@ -35,6 +36,9 @@ UITextField *_nameEntered;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     arrayOfItems = [[GroceryList alloc] init];
+    addItemText.delegate = self;
+    addItemButton.enabled = FALSE;
+    [addItemButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,26 +47,15 @@ UITextField *_nameEntered;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)addItem:(id)sender;
-{
-    _rows++;
-    [self.tableView reloadData];
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 2;
-}
-
+//Actions
 -(IBAction)cancelPressed:(id)sender
 {
     _rows = 0;
     [self dismissModalViewControllerAnimated:YES];
 }
 
--(IBAction)savePressed:(id)sender;
+-(IBAction)savePressed:(id)sender
 {
-    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter" message:@"Enter the name for this list:" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Ok", nil];
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     _nameEntered = [alertView textFieldAtIndex:0];
@@ -70,10 +63,8 @@ UITextField *_nameEntered;
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        NSLog(@"Cancel Tapped.");
-    }
-    else if (buttonIndex == 1) {
+    if (buttonIndex == 1)
+    {
         _rows = 0;
         [self dismissModalViewControllerAnimated:YES];
         if([delegate respondsToSelector:@selector(listCompleted:)])
@@ -88,13 +79,60 @@ UITextField *_nameEntered;
     }
 }
 
+-(IBAction)addPressed:(id)sender
+{
+    if([sender isEqual:addItemButton] && !addItemButton.isEnabled)
+    {
+        return;
+    }
+    [self addItem];
+}
+//End Actions
+
+-(void)addItem
+{
+    [addItemText resignFirstResponder];
+    if([addItemText.text isEqualToString:@""])
+    {           
+        return;           
+    }
+    GroceryItem* item;
+    NSString* itemText = addItemText.text;
+    item = [[GroceryItem alloc] initWithName:itemText];
+    [arrayOfItems addItem:item];
+    
+    _rows++;
+    [self.tableView reloadData];
+}
+
+//TextField methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self addItem];
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)sender{
+    if([sender isEqual:addItemText])
+    {
+        addItemButton.enabled = TRUE;
+        addItemText.text = @"";
+    }
+}
+-(void)textFieldDidEndEditing:(UITextField *)sender{
+    if([sender isEqual:addItemText])
+    {
+        addItemButton.enabled = FALSE;
+    }
+}
+
+//Table methods
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 1)
-    {
-        return 1;
-    }
     return _rows;
 }
 
@@ -102,57 +140,17 @@ UITextField *_nameEntered;
 {
     static NSString* cellID = @"Cell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    UITextField *inputField;
-    inputField.delegate = self;
-    inputField.returnKeyType = UIReturnKeyDone;
     
     if(cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
     }
     
-    if(indexPath.section == 1)
-    {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [button setFrame:CGRectMake(10, 0, 300, 46)];
-        
-        [button setTitle:@"Add Item" forState:UIControlStateNormal];
-        [button.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
-        
-        button.userInteractionEnabled=YES;
-        
-        [button addTarget:self action:@selector(addItem:) forControlEvents:UIControlEventTouchUpInside];
-        [button becomeFirstResponder];
-        [cell addSubview:button];
-        return cell;
-    }
-    
     if(indexPath.row == _rows-1)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell becomeFirstResponder];
-        
-        inputField = [[UITextField alloc] initWithFrame:CGRectMake(12,12,185,30)];
-        inputField.adjustsFontSizeToFitWidth = YES;
-        [inputField setTag:indexPath.row+1];
-        
-        [cell addSubview:inputField];
-    }
-    else if(indexPath.row == _rows-2)
-    {
-        UIView* itemView = [cell viewWithTag:indexPath.row+1];
-        UITextView* textView = (UITextView*)itemView;
-        GroceryItem* item;
-        item = [[GroceryItem alloc] initWithName:textView.text];
-        [arrayOfItems addItem:item];
+        cell.textLabel.text = addItemText.text;
     }
     return cell;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

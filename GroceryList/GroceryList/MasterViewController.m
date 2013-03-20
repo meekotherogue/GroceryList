@@ -68,19 +68,20 @@
 
 -(void)recipeEntered
 {
-    if (!self.addRecipeViewController)
-    {
-        self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
-        self.addRecipeViewController.delegate = self;
-    }
-    [ self.navigationController pushViewController:self.addRecipeViewController animated:YES];
-    [self dismissModalViewControllerAnimated:NO];
+
 }
 
+//Delegates
+//CreateList delegate
 -(void)listCompleted:(GroceryList*)list
 {
     _currentList = list;
     [_allLists addObject:list];
+}
+//ListSelected delegate
+-(void)listSelected:(int)listID
+{
+    _currentList = _allLists[listID];
 }
 
 #pragma mark - Table View

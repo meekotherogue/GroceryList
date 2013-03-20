@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol AddRecipeDelegate
-@required
--(void)recipeEntered;
-@end
+#import "AddRecipeViewController.h"
 
 @interface RecipeListViewController : UIViewController
 @property(nonatomic,assign)id delegate;
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
+@property (strong, nonatomic) UINavigationController *navigationController;
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) AddRecipeViewController *addRecipeViewController;
+
 -(IBAction)backPressed:(id)sender;
 -(IBAction)addPressed:(id)sender;
 @end

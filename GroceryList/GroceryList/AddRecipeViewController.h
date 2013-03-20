@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol CreateRecipeDelegate
+@required
+-(void)recipeEntered;
+@end
 
 @interface AddRecipeViewController : UIViewController
 @property(nonatomic,assign)id delegate;
