@@ -13,7 +13,6 @@
 @end
 @implementation RecipeListViewController
 
-@synthesize delegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -62,12 +61,13 @@
 
 -(IBAction)addPressed:(id)sender
 {
-    if([delegate respondsToSelector:@selector(recipeEntered)])
+    /*if([delegate respondsToSelector:@selector(recipeEntered)])
     {
         //send the delegate function with the amount entered by the user
         [delegate recipeEntered];
-    }
+    }*/
     //[self dismissModalViewControllerAnimated:NO];
+    [self dismissModalViewControllerAnimated:NO];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

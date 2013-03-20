@@ -212,7 +212,16 @@
             self.recipeListViewController.delegate = self;
         }
         [ self presentViewController:self.recipeListViewController animated:YES completion:^{
-            //Blah
+            if (!self.addRecipeViewController)
+            {
+                self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
+                self.addRecipeViewController.delegate = self;
+                
+                UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector( doneFunc ) ];
+                
+                self.addRecipeViewController.navigationItem.rightBarButtonItem = doneButton;
+            }
+            [self.navigationController pushViewController:self.addRecipeViewController animated:YES];
         }];
     }
     //Show all items

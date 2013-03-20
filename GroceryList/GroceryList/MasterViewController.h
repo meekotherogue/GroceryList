@@ -21,5 +21,6 @@
 @property (strong, nonatomic) CurrentListViewController *currentListViewController;
 @property (strong, nonatomic) ListsViewController *listViewController;
 @property (strong, nonatomic) RecipeListViewController *recipeListViewController;
+@property (strong, nonatomic) AddRecipeViewController *addRecipeViewController;
 
 @end
