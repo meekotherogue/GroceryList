@@ -13,7 +13,7 @@
 -(void)recipeCreated:(GroceryList*)items;
 @end
 
-@interface AddRecipeViewController : UIViewController<UITextFieldDelegate>
+@interface AddRecipeViewController : UIViewController <UITextFieldDelegate>
 {
     IBOutlet UITextField* addItemText;
     IBOutlet UIButton* addItemButton;

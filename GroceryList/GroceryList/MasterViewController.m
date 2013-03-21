@@ -84,7 +84,20 @@
 //Receipes added
 -(void)recipesAdded:(NSMutableArray*)list
 {
-    
+    for(int i=0; i < list.count; i++)
+    {
+        GroceryList* addList = list[i];
+        [_allRecipes addObject:addList];
+    }
+}
+-(void)recipeSeledted:(int)recipeId
+{
+    _currentRecipe = _allRecipes[recipeId];
+    for(int i=0; i < _currentRecipe.listOfItems.count; i++)
+    {
+        GroceryItem* item = _currentRecipe.listOfItems[i];
+        [_currentList addItem:item];
+    }
 }
 
 #pragma mark - Table View
@@ -213,6 +226,7 @@
         {
             self.recipeListViewController = [[RecipeListViewController alloc] initWithNibName:@"RecipeListViewController" bundle:nil];
             self.recipeListViewController.delegate = self;
+            self.recipeListViewController.allRecipes = _allRecipes;
         }
         [ self presentViewController:self.recipeListViewController animated:YES completion:^{
             /*if (!self.addRecipeViewController)

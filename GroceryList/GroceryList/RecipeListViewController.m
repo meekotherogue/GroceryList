@@ -14,6 +14,7 @@
 @end
 @implementation RecipeListViewController
 @synthesize delegate;
+int _rows;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    _rows = self.allRecipes.count;
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,27 +41,38 @@
 }
 -(void)recipeCreated:(GroceryList*) list
 {
+    _rows++;
+    [self.allRecipes addObject:list];
+    [self.tableView reloadData];
 }
 
 //Actions
 -(IBAction)backPressed:(id)sender
 {
+    _rows = 0;
+    [self returnLists];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(IBAction)addPressed:(id)sender
 {
-    if (!self.addRecipeViewController)
-    {
-        self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
-        self.addRecipeViewController.delegate = self;
-    }
+    self.addRecipeViewController = NULL;
+    self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
+    self.addRecipeViewController.delegate = self;
     [self presentViewController:self.addRecipeViewController animated:YES completion:^{
-        //Blah
     }];
 }
 //End Actions
 
+-(void)returnLists
+{
+    if([delegate respondsToSelector:@selector(recipesAdded:)])
+    {
+        [delegate recipesAdded:self.allRecipes];
+    }
+}
+
+//Table methods
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.allRecipes.count;
@@ -80,5 +95,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
+    _rows=0;
+    if([delegate respondsToSelector:@selector(recipeSelected:)])
+    {
+        [self returnLists];
+        [delegate recipeSelected:indexPath.row];
+    }
+    [self dismissModalViewControllerAnimated:NO];
 }
 @end

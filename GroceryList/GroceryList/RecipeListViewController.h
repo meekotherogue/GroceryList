@@ -10,7 +10,8 @@
 #import "AddRecipeViewController.h"
 @protocol AddRecipeDelegate
 @required
--(void)recipesAdded;
+-(void)recipesAdded:(NSMutableArray*)list;
+-(void)recipeSelected:(int)recipeId;
 @end
 
 @interface RecipeListViewController : UIViewController

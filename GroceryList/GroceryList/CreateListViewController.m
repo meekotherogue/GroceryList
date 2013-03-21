@@ -20,7 +20,7 @@
 @synthesize delegate;
 
 int _rows = 0;
-UITextField *_nameEntered;
+UITextField* _nameEntered;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -111,14 +111,16 @@ UITextField *_nameEntered;
     [self addItem];
     return YES;
 }
--(void)textFieldDidBeginEditing:(UITextField *)sender{
+-(void)textFieldDidBeginEditing:(UITextField *)sender
+{
     if([sender isEqual:addItemText])
     {
         addItemButton.enabled = TRUE;
         addItemText.text = @"";
     }
 }
--(void)textFieldDidEndEditing:(UITextField *)sender{
+-(void)textFieldDidEndEditing:(UITextField *)sender
+{
     if([sender isEqual:addItemText])
     {
         addItemButton.enabled = FALSE;
