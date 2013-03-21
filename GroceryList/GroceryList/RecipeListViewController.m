@@ -103,11 +103,11 @@ NSMutableArray* _newRecipes;
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
     _rows=0;
     self.allRecipes =NULL;
+    [self dismissModalViewControllerAnimated:NO];
     if([delegate respondsToSelector:@selector(recipeSelected:)])
     {
         [self returnLists];
         [delegate recipeSelected:indexPath.row];
     }
-    [self dismissModalViewControllerAnimated:NO];
 }
 @end

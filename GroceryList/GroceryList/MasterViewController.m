@@ -84,12 +84,19 @@
 
 -(void)recipeSelected:(int)recipeId
 {
-    _currentRecipe = _allRecipes[recipeId];
+    self.showRecipeViewController = NULL;
+    self.showRecipeViewController = [[ShowRecipeViewController alloc] initWithNibName:@"RecipeListViewController" bundle:nil];
+    self.showRecipeViewController.delegate = self;
+    self.showRecipeViewController.recipeToShow = _allRecipes[recipeId];
+    
+    [ self.navigationController pushViewController:self.showRecipeViewController animated:YES];
+    
+    /*_currentRecipe = _allRecipes[recipeId];
     for(int i=0; i < _currentRecipe.listOfItems.count; i++)
     {
         GroceryItem* item = _currentRecipe.listOfItems[i];
         [_currentList addItem:item];
-    }
+    }*/
 }
 
 #pragma mark - Table View

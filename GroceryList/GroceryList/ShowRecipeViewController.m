@@ -29,8 +29,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UIBarButtonItem* selectButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(selectRecipe)];
-    
     self.navigationItem.rightBarButtonItem = selectButton;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,5 +47,26 @@
         [delegate recipeSelected];
     }
 }
+
+-(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.recipeToShow.listOfItems.count;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString* cellID = @"Cell";
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
+    }
+    GroceryItem* item = self.recipeToShow.listOfItems[indexPath.row];
+    cell.textLabel.text = item.name;
+    
+    return cell;
+}
+
 
 @end

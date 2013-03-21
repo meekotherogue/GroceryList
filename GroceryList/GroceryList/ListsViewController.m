@@ -38,6 +38,18 @@ NSIndexPath* _currentSelection;
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)backPressed:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    if([delegate respondsToSelector:@selector(listSelected:)])
+    {
+        if(_currentSelection != nil)
+        {
+            [delegate listSelected:_currentSelection.row];
+        }
+    }
+}
+
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.allLists.count;
@@ -56,18 +68,6 @@ NSIndexPath* _currentSelection;
     cell.textLabel.text = list.name;
     
     return cell;
-}
-
--(IBAction)backPressed:(id)sender
-{
-    [self dismissModalViewControllerAnimated:YES];
-    if([delegate respondsToSelector:@selector(listSelected:)])
-    {
-        if(_currentSelection != nil)
-        {
-            [delegate listSelected:_currentSelection.row];
-        }
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
