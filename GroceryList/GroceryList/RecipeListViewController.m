@@ -15,6 +15,7 @@
 @implementation RecipeListViewController
 @synthesize delegate;
 int _rows;
+NSMutableArray* _newRecipes;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +32,7 @@ int _rows;
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    _newRecipes = [[NSMutableArray alloc] initWithCapacity:0];
     _rows = self.allRecipes.count;
 }
 
@@ -39,9 +41,11 @@ int _rows;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(void)recipeCreated:(GroceryList*) list
 {
     _rows++;
+    [_newRecipes addObject:list];
     [self.allRecipes addObject:list];
     [self.tableView reloadData];
 }
@@ -50,6 +54,7 @@ int _rows;
 -(IBAction)backPressed:(id)sender
 {
     _rows = 0;
+    self.allRecipes = NULL;
     [self returnLists];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -68,7 +73,7 @@ int _rows;
 {
     if([delegate respondsToSelector:@selector(recipesAdded:)])
     {
-        [delegate recipesAdded:self.allRecipes];
+        [delegate recipesAdded:_newRecipes];
     }
 }
 
@@ -87,6 +92,7 @@ int _rows;
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
     }
+    NSLog(@"%d",indexPath.row);
     GroceryList* list = self.allRecipes[indexPath.row];
     cell.textLabel.text = list.name;
     
@@ -96,6 +102,7 @@ int _rows;
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
     _rows=0;
+    self.allRecipes =NULL;
     if([delegate respondsToSelector:@selector(recipeSelected:)])
     {
         [self returnLists];
