@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UIBarButtonItem* selectButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(selectRecipe)];
+    UIBarButtonItem* selectButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(selectRecipe)];
     self.navigationItem.rightBarButtonItem = selectButton;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -42,9 +42,9 @@
 
 -(void)selectRecipe
 {
-    if([delegate respondsToSelector:@selector(recipeSelected:)])
+    if([delegate respondsToSelector:@selector(addRecipeToCurrentList:)])
     {
-        [delegate recipeSelected];
+        [delegate addRecipeToCurrentList];
     }
 }
 

@@ -10,7 +10,7 @@
 #import "GroceryList.h"
 @protocol ShowRecipeDelegate
 @required
--(void)recipeSelected;
+-(void)addRecipeToCurrentList;
 @end
 
 
