@@ -11,7 +11,6 @@
 @protocol CreateListDelegate
 @required
 -(void)listCompleted:(GroceryList*)items;
-
 @end
 
 @interface CreateListViewController : UIViewController <UITextFieldDelegate>

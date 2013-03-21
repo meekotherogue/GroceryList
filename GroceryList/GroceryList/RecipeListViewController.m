@@ -7,11 +7,13 @@
 //
 
 #import "RecipeListViewController.h"
+#import "GroceryList.h"
 
 @interface RecipeListViewController ()
 
 @end
 @implementation RecipeListViewController
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,27 +35,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
--(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
+-(void)recipeCreated:(NSMutableArray*) list
 {
-    return 50;
 }
 
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString* cellID = @"Cell";
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    UITextField *inputField;
-    
-    if(cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
-    }
-    
-    
-    return cell;
-}
-
+//Actions
 -(IBAction)backPressed:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -61,15 +47,36 @@
 
 -(IBAction)addPressed:(id)sender
 {
-    /*if([delegate respondsToSelector:@selector(recipeEntered)])
+    if (!self.addRecipeViewController)
     {
-        //send the delegate function with the amount entered by the user
-        [delegate recipeEntered];
-    }*/
-    //[self dismissModalViewControllerAnimated:NO];
-    [self dismissModalViewControllerAnimated:NO];
+        self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
+        self.addRecipeViewController.delegate = self;
+    }
+    [self presentViewController:self.addRecipeViewController animated:YES completion:^{
+        //Blah
+    }];
+}
+//End Actions
+
+-(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.allRecipes.count;
 }
 
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString* cellID = @"Cell";
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
+    }
+    GroceryList* list = self.allRecipes[indexPath.row];
+    cell.textLabel.text = list.name;
+    
+    return cell;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];

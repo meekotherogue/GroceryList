@@ -7,11 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GroceryList.h"
 @protocol CreateRecipeDelegate
 @required
--(void)recipeEntered;
+-(void)recipeCreated:(GroceryList*)items;
 @end
 
-@interface AddRecipeViewController : UIViewController
+@interface AddRecipeViewController : UIViewController<UITextFieldDelegate>
+{
+    IBOutlet UITextField* addItemText;
+    IBOutlet UIButton* addItemButton;
+}
 @property(nonatomic,assign)id delegate;
+@property(nonatomic, strong) IBOutlet UITableView* tableView;
+
+-(IBAction)cancelPressed:(id)sender;
+-(IBAction)savePressed:(id)sender;
+-(IBAction)addPressed:(id)sender;
 @end
+
+
+

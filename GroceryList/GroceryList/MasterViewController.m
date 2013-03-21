@@ -21,6 +21,8 @@
     NSArray* _tableData;
     GroceryList* _currentList;
     NSMutableArray* _allLists;
+    GroceryList* _currentRecipe;
+    NSMutableArray* _allRecipes;
 }
 @end
 
@@ -44,6 +46,7 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TitlePage" ofType:@"plist"];
     _tableData = [NSArray arrayWithContentsOfFile:filePath];
     _allLists = [[NSMutableArray alloc] initWithCapacity:0];
+    _allRecipes = [[NSMutableArray alloc] initWithCapacity:0];
     
     //TESTLIST //Actually look in memory
     //currentList = [NSArray alloc];
@@ -66,11 +69,6 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(void)recipeEntered
-{
-
-}
-
 //Delegates
 //CreateList delegate
 -(void)listCompleted:(GroceryList*)list
@@ -82,6 +80,11 @@
 -(void)listSelected:(int)listID
 {
     _currentList = _allLists[listID];
+}
+//Receipes added
+-(void)recipesAdded:(NSMutableArray*)list
+{
+    
 }
 
 #pragma mark - Table View
@@ -212,7 +215,7 @@
             self.recipeListViewController.delegate = self;
         }
         [ self presentViewController:self.recipeListViewController animated:YES completion:^{
-            if (!self.addRecipeViewController)
+            /*if (!self.addRecipeViewController)
             {
                 self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
                 self.addRecipeViewController.delegate = self;
@@ -221,7 +224,7 @@
                 
                 self.addRecipeViewController.navigationItem.rightBarButtonItem = doneButton;
             }
-            [self.navigationController pushViewController:self.addRecipeViewController animated:YES];
+            [self.navigationController pushViewController:self.addRecipeViewController animated:YES];*/
         }];
     }
     //Show all items

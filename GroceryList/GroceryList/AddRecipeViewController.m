@@ -7,13 +7,19 @@
 //
 
 #import "AddRecipeViewController.h"
+#import "GroceryList.h"
+#import "GroceryItem.h"
 
 @interface AddRecipeViewController ()
-
+{
+    GroceryList* arrayOfItems;
+}
 @end
 
 @implementation AddRecipeViewController
 @synthesize delegate;
+int _rows;
+UITextField* _nameEntered;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +40,40 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//Actions
+-(IBAction)cancelPressed:(id)sender
+{
+    _rows = 0;
+    [self dismissModalViewControllerAnimated:YES];
+}
+-(IBAction)savePressed:(id)sender
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter" message:@"Enter the name for this list:" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Ok", nil];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    _nameEntered = [alertView textFieldAtIndex:0];
+    [alertView show];
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1)
+    {
+        _rows = 0;
+        if([delegate respondsToSelector:@selector(recipeCreated:)])
+        {
+            //send the delegate function with the amount entered by the user
+            if(![_nameEntered.text isEqualToString:@""])
+            {
+                arrayOfItems.name = _nameEntered.text;
+            }
+            [delegate recipeCreated:arrayOfItems];
+        }
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+-(IBAction)addPressed:(id)sender
+{
+    
 }
 
 @end
