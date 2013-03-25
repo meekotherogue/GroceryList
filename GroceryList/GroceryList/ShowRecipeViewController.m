@@ -30,6 +30,7 @@
     // Do any additional setup after loading the view from its nib.
     UIBarButtonItem* selectButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(selectRecipe)];
     self.navigationItem.rightBarButtonItem = selectButton;
+    self.title = self.recipeToShow.name;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 }
@@ -44,7 +45,7 @@
 {
     if([delegate respondsToSelector:@selector(addRecipeToCurrentList:)])
     {
-        [delegate addRecipeToCurrentList];
+        [delegate addRecipeToCurrentList:9];
     }
 }
 

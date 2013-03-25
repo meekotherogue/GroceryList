@@ -23,6 +23,7 @@
     NSMutableArray* _allLists;
     GroceryList* _currentRecipe;
     NSMutableArray* _allRecipes;
+    NSMutableDictionary* _allItems;
 }
 @end
 
@@ -48,6 +49,9 @@
     _allLists = [[NSMutableArray alloc] initWithCapacity:0];
     _allRecipes = [[NSMutableArray alloc] initWithCapacity:0];
     
+    //TODO: load from phone, items that already exist
+    _allItems = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
     //TESTLIST //Actually look in memory
     //currentList = [NSArray alloc];
     //currentList = [NSArray arrayWithObjects:@"first", @"second", @"third" , nil];
@@ -69,19 +73,34 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+-(void)addItemsFromList:(GroceryList*)list
+{
+    for(int i = 0; i < list.listOfItems.count; i++)
+    {
+        GroceryItem* item =list.listOfItems[i];
+        NSString* itemName = item.name;
+        if(!_allItems[itemName])
+        {
+            [_allItems setObject:list.listOfItems[i] forKey:list.name];
+        }
+    }
+}
+
 //Delegates
 //CreateList delegate
 -(void)listCompleted:(GroceryList*)list
 {
     _currentList = list;
     [_allLists addObject:list];
+    
+    [self addItemsFromList:list];
 }
 //ListSelected delegate
 -(void)listSelected:(int)listID
 {
     _currentList = _allLists[listID];
 }
-
+//RecipesSelected delegate
 -(void)recipeSelected:(int)recipeId
 {
     _currentRecipe = _allRecipes[recipeId];
@@ -90,13 +109,42 @@
     self.showRecipeViewController.delegate = self;
     self.showRecipeViewController.recipeToShow = _allRecipes[recipeId];
     
-    [ self.navigationController pushViewController:self.showRecipeViewController animated:YES];
+    [ self.navigationController pushViewController:self.showRecipeViewController animated:NO];
 }
--(void)addRecipeToCurrentList
+//Delegate for adding what's on the current recipe to the current list
+-(void)addRecipeToCurrentList:(int)dum
 {
+    if(!_currentList.listOfItems || !_currentList.listOfItems.count)
+    {
+        _currentList = [[GroceryList alloc] initWithName:_currentRecipe.name];
+        [_allLists addObject:_currentRecipe];
+        
+    }
     for(int i=0; i < _currentRecipe.listOfItems.count; i++)
     {
         GroceryItem* item = _currentRecipe.listOfItems[i];
+        [_currentList addItem:item];
+    }
+}
+//Delegate for adding the recipe items to the list of all items
+-(void)recipesAdded:(NSMutableArray*)list
+{
+    for (int i = 0; i < list.count; i++)
+    {
+        GroceryList* curList = list[i];
+        for (int j = 0; j < curList.listOfItems.count; j++)
+        {
+            GroceryItem* curItem = curList.listOfItems[j];
+            [_allItems setObject:curItem forKey:curItem.name];
+        }
+    }
+}
+//Add Items to list delegate
+-(void)addItems:(NSMutableArray*)items
+{
+    for(int i = 0; i < items.count; i++)
+    {
+        GroceryItem* item = items[i];
         [_currentList addItem:item];
     }
 }
@@ -244,7 +292,12 @@
     //Show all items
     else if(index == 4)
     {
-    
+        self.itemListViewController = NULL;
+        self.itemListViewController = [[ItemListViewController alloc] initWithNibName:@"ItemListViewController" bundle:nil];
+        self.itemListViewController.delegate = self;
+        self.itemListViewController.allItems = _allItems;
+        
+        [ self.navigationController pushViewController:self.itemListViewController animated:YES];
     }
 }
 

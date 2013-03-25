@@ -1,22 +1,23 @@
 //
-//  RecipeListViewController.m
+//  ItemListViewController.m
 //  GroceryList
 //
-//  Created by Martina Nagy on 2013-03-03.
+//  Created by Martina Nagy on 2013-03-24.
 //  Copyright (c) 2013 Martina Nagy. All rights reserved.
 //
 
-#import "RecipeListViewController.h"
-#import "GroceryList.h"
+#import "ItemListViewController.h"
 
-@interface RecipeListViewController ()
+@interface ItemListViewController ()
 {
     int _rows;
+    NSArray* allItemsArray;
+    NSMutableArray* itemsSelected;
 }
 @end
-@implementation RecipeListViewController
+
+@implementation ItemListViewController
 @synthesize delegate;
-NSMutableArray* _newRecipes;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,8 +34,10 @@ NSMutableArray* _newRecipes;
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    _newRecipes = [[NSMutableArray alloc] initWithCapacity:0];
-    _rows = self.allRecipes.count;
+    _rows = 0;
+    self.title = @"All Items";
+    
+    allItemsArray = [self.allItems allValues];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,45 +46,27 @@ NSMutableArray* _newRecipes;
     // Dispose of any resources that can be recreated.
 }
 
--(void)recipeCreated:(GroceryList*) list
-{
-    _rows++;
-    [_newRecipes addObject:list];
-    [self.allRecipes addObject:list];
-    [self.tableView reloadData];
-}
-
 //Actions
 -(IBAction)backPressed:(id)sender
 {
     _rows = 0;
-    self.allRecipes = NULL;
-    [self returnLists];
+    self.allItems = NULL;
     [self dismissModalViewControllerAnimated:YES];
-}
-
--(IBAction)addPressed:(id)sender
-{
-    self.addRecipeViewController = NULL;
-    self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
-    self.addRecipeViewController.delegate = self;
-    [self presentViewController:self.addRecipeViewController animated:YES completion:^{
-    }];
-}
-//End Actions
-
--(void)returnLists
-{
-    if([delegate respondsToSelector:@selector(recipesAdded:)])
+    //Delegate to send items back
+    [self dismissModalViewControllerAnimated:YES];
+    if([delegate respondsToSelector:@selector(addItems:)])
     {
-        [delegate recipesAdded:_newRecipes];
+        [delegate addItems:itemsSelected];
     }
+    itemsSelected = NULL;
 }
+
+//End Actions
 
 //Table methods
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.allRecipes.count;
+    return self.allItems.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,22 +78,14 @@ NSMutableArray* _newRecipes;
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
     }
-    NSLog(@"%d",indexPath.row);
-    GroceryList* list = self.allRecipes[indexPath.row];
-    cell.textLabel.text = list.name;
+    GroceryItem* item = allItemsArray[indexPath.row];
+    cell.textLabel.text = item.name;
     
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
-    _rows=0;
-    self.allRecipes =NULL;
-    [self dismissModalViewControllerAnimated:NO];
-    if([delegate respondsToSelector:@selector(recipeSelected:)])
-    {
-        [self returnLists];
-        [delegate recipeSelected:indexPath.row];
-    }
+    [itemsSelected addObject:allItemsArray[indexPath.row]];
 }
 @end

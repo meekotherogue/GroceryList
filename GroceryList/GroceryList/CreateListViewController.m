@@ -13,13 +13,14 @@
 @interface CreateListViewController ()
 {
     GroceryList* arrayOfItems;
+    int _rows;
 }
 @end
 
 @implementation CreateListViewController
 @synthesize delegate;
 
-int _rows = 0;
+
 UITextField* _nameEntered;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,6 +40,7 @@ UITextField* _nameEntered;
     addItemText.delegate = self;
     addItemButton.enabled = FALSE;
     [addItemButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    _rows = 0;
 }
 
 - (void)didReceiveMemoryWarning

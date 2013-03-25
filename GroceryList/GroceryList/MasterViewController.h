@@ -13,6 +13,7 @@
 #import "RecipeListViewController.h"
 #import "AddRecipeViewController.h"
 #import "ShowRecipeViewController.h"
+#import "ItemListViewController.h"
 //@class DetailViewController;
 
 @interface MasterViewController : UITableViewController
@@ -23,5 +24,6 @@
 @property (strong, nonatomic) ListsViewController *listViewController;
 @property (strong, nonatomic) RecipeListViewController *recipeListViewController;
 @property (strong, nonatomic) ShowRecipeViewController *showRecipeViewController;
+@property (strong, nonatomic) ItemListViewController *itemListViewController;
 
 @end

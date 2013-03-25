@@ -33,6 +33,8 @@
 		5B87A85B16E3FA2A003D7E6B /* CurrentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B87A85916E3FA2A003D7E6B /* CurrentListViewController.xib */; };
 		5BA81F2B16F6CDEC0020A4DC /* GroceryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA81F2A16F6CDEC0020A4DC /* GroceryItem.m */; };
 		5BA81F3F16F6D4960020A4DC /* GroceryList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA81F3E16F6D4960020A4DC /* GroceryList.m */; };
+		5BAA8CEF1700081D002F4613 /* ItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA8CED1700081D002F4613 /* ItemListViewController.m */; };
+		5BAA8CF01700081D002F4613 /* ItemListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA8CEE1700081D002F4613 /* ItemListViewController.xib */; };
 		5BBEFE2D16FAAEED001F429F /* ShowRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBEFE2B16FAAEED001F429F /* ShowRecipeViewController.m */; };
 		5BBEFE2E16FAAEED001F429F /* ShowRecipeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BBEFE2C16FAAEED001F429F /* ShowRecipeViewController.xib */; };
 /* End PBXBuildFile section */
@@ -77,6 +79,9 @@
 		5BA81F2A16F6CDEC0020A4DC /* GroceryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryItem.m; sourceTree = "<group>"; };
 		5BA81F3D16F6D4960020A4DC /* GroceryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroceryList.h; sourceTree = "<group>"; };
 		5BA81F3E16F6D4960020A4DC /* GroceryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroceryList.m; sourceTree = "<group>"; };
+		5BAA8CEC1700081D002F4613 /* ItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListViewController.h; sourceTree = "<group>"; };
+		5BAA8CED1700081D002F4613 /* ItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListViewController.m; sourceTree = "<group>"; };
+		5BAA8CEE1700081D002F4613 /* ItemListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemListViewController.xib; sourceTree = "<group>"; };
 		5BBEFE2A16FAAEED001F429F /* ShowRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowRecipeViewController.h; sourceTree = "<group>"; };
 		5BBEFE2B16FAAEED001F429F /* ShowRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowRecipeViewController.m; sourceTree = "<group>"; };
 		5BBEFE2C16FAAEED001F429F /* ShowRecipeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowRecipeViewController.xib; sourceTree = "<group>"; };
@@ -188,6 +193,9 @@
 				5BBEFE2A16FAAEED001F429F /* ShowRecipeViewController.h */,
 				5BBEFE2B16FAAEED001F429F /* ShowRecipeViewController.m */,
 				5BBEFE2C16FAAEED001F429F /* ShowRecipeViewController.xib */,
+				5BAA8CEC1700081D002F4613 /* ItemListViewController.h */,
+				5BAA8CED1700081D002F4613 /* ItemListViewController.m */,
+				5BAA8CEE1700081D002F4613 /* ItemListViewController.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -256,6 +264,7 @@
 				5B1C004D16E45042006986BA /* RecipeListViewController.xib in Resources */,
 				5B1C005216E455C2006986BA /* AddRecipeViewController.xib in Resources */,
 				5BBEFE2E16FAAEED001F429F /* ShowRecipeViewController.xib in Resources */,
+				5BAA8CF01700081D002F4613 /* ItemListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +287,7 @@
 				5BA81F2B16F6CDEC0020A4DC /* GroceryItem.m in Sources */,
 				5BA81F3F16F6D4960020A4DC /* GroceryList.m in Sources */,
 				5BBEFE2D16FAAEED001F429F /* ShowRecipeViewController.m in Sources */,
+				5BAA8CEF1700081D002F4613 /* ItemListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

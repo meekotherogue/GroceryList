@@ -13,12 +13,12 @@
 @interface AddRecipeViewController ()
 {
     GroceryList* arrayOfItems;
+    int _rows;
 }
 @end
 
 @implementation AddRecipeViewController
 @synthesize delegate;
-int _rows;
 UITextField* _nameEntered;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

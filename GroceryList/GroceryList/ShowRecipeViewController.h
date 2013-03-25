@@ -10,12 +10,12 @@
 #import "GroceryList.h"
 @protocol ShowRecipeDelegate
 @required
--(void)addRecipeToCurrentList;
+-(void)addRecipeToCurrentList:(int)dum;
 @end
 
 
 @interface ShowRecipeViewController : UIViewController
 @property (nonatomic,strong) GroceryList* recipeToShow;
-@property(nonatomic,assign) id delegate;
+@property(nonatomic,assign)id delegate;
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
 @end
