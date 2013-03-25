@@ -81,7 +81,7 @@
         NSString* itemName = item.name;
         if(!_allItems[itemName])
         {
-            [_allItems setObject:list.listOfItems[i] forKey:list.name];
+            [_allItems setObject:list.listOfItems[i] forKey:itemName];
         }
     }
 }
@@ -132,11 +132,7 @@
     for (int i = 0; i < list.count; i++)
     {
         GroceryList* curList = list[i];
-        for (int j = 0; j < curList.listOfItems.count; j++)
-        {
-            GroceryItem* curItem = curList.listOfItems[j];
-            [_allItems setObject:curItem forKey:curItem.name];
-        }
+        [self addItemsFromList:curList];
     }
 }
 //Add Items to list delegate

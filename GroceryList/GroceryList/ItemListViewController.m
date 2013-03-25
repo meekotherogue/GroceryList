@@ -36,6 +36,14 @@
     self.tableView.delegate = self;
     _rows = 0;
     self.title = @"All Items";
+    itemsSelected = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    /*allItemsArray = [self.allItems keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2)
+                                   {
+                                       GroceryItem* item1 = obj1;
+                                       GroceryItem* item2 = obj2;
+                                       return [item2.name compare:item1.name];
+                                   }];*/
     
     allItemsArray = [self.allItems allValues];
 }
@@ -59,6 +67,21 @@
         [delegate addItems:itemsSelected];
     }
     itemsSelected = NULL;
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+    }
+    _rows = 0;
+    self.allItems = NULL;
+    if([delegate respondsToSelector:@selector(addItems:)])
+    {
+        [delegate addItems:itemsSelected];
+    }
+    itemsSelected = NULL;
+    [super viewWillDisappear:animated];
 }
 
 //End Actions
@@ -86,6 +109,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
-    [itemsSelected addObject:allItemsArray[indexPath.row]];
+    GroceryItem* item = allItemsArray[indexPath.row];
+    [itemsSelected addObject:item];
 }
 @end
