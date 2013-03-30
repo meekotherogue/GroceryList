@@ -56,7 +56,8 @@
     _allItems = [[NSMutableDictionary alloc] initWithCapacity:0];
 
     _allItems = [self.databaseHelper loadItems];
-    _allLists = [self.databaseHelper loadLists];
+    _allLists = [self.databaseHelper loadLists:@"List"];
+    //_allRecipes = [self.databaseHelper loadLists:@"Recipe"];
 
 }
 
@@ -102,7 +103,7 @@
     
     NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
     [listArray addObject:list];
-    [self.databaseHelper saveLists:listArray];
+    [self.databaseHelper saveLists:listArray whichToSave:@"List"];
     
     [self addItemsFromList:list];
 }
@@ -112,6 +113,11 @@
     for (int i = 0; i < lists.count; i++)
     {
         GroceryList* curList = lists[i];
+        if(_currentList == nil)
+        {
+            _currentList = curList;
+            continue;
+        }
         for(int j = 0; j < curList.listOfItems.count; j++)
         {
             GroceryItem* item = curList.listOfItems[j];
@@ -235,7 +241,7 @@
     //Show current list
     if(index == 0)
     {
-        if(_allLists.count <= 0)
+        if(_currentList == nil)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No lists entered"
                                                             message:@"You must enter a list into the app before you can view one.  Please go to \"Create List\" and enter your list."
@@ -266,7 +272,7 @@
     //View all lists
     else if(index == 2)
     {
-        if(_currentList == nil)
+        if(_allLists.count <= 0)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No lists entered"
                                                             message:@"You must enter a list into the app before you can view one.  Please go to \"Create List\" and enter your list."

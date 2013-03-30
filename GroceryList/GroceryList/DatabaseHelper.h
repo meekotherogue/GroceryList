@@ -16,9 +16,9 @@
     sqlite3* groceryDB;
 }
 -(id) init;
--(void)saveLists:(NSArray*)lists;
--(NSMutableArray*)loadLists;
+-(void)saveLists:(NSArray*)lists whichToSave:(NSString*)whichToSave;
+-(NSMutableArray*)loadLists:(NSString*)whichToLoad;
 -(void)saveItems:(NSMutableArray*)items;
 -(NSMutableDictionary*)loadItems;
--(NSMutableArray*)loadItemsGivenItemId:(NSString*)itemIds;
+
 @end

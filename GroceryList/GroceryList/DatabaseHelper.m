@@ -74,13 +74,7 @@
     }
     return toReturn;
 }
--(NSMutableArray*)deserializeItemID:(NSString*)items
-{
-    NSMutableArray* newItems = [NSMutableArray arrayWithArray:[items componentsSeparatedByString: @","]];
-    
-    
-    return newItems;
-}
+
 -(NSString*)getVenueIDString:(NSMutableArray*)venues
 {
     NSString* toReturn = @"";
@@ -95,6 +89,7 @@
     }
     return toReturn;
 }
+
 -(NSMutableArray*)deserializeVenueID:(NSString*)venues
 {
     NSMutableArray* newVenues = [NSMutableArray arrayWithArray:[venues componentsSeparatedByString: @","]];
@@ -102,7 +97,43 @@
 }
 
 //Database methods
--(NSMutableArray*)loadLists
+-(NSMutableArray*)loadLists:(NSString*)whichToLoad
+{
+    const char* dbpath = [databasePath UTF8String];
+    sqlite3_stmt* loadListStatment;
+    NSMutableArray* lists = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    if (sqlite3_open(dbpath, &groceryDB) != SQLITE_OK)
+    {
+        return NULL;
+    }
+    
+    NSString* loadListSQL = [NSString stringWithFormat: @"SELECT name, datecreated, item_ids FROM %@", whichToLoad];
+    
+    const char *loadListQuery = [loadListSQL UTF8String];
+    
+    if (sqlite3_prepare_v2(groceryDB, loadListQuery, -1, &loadListStatment, NULL) != SQLITE_OK)
+    {
+        sqlite3_close(groceryDB);
+        return NULL;
+    }
+    while (sqlite3_step(loadListStatment) == SQLITE_ROW)
+    {
+        NSString* name = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadListStatment, 0)];
+        NSString* dateCreated = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadListStatment, 1)];
+        NSString* itemIds = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadListStatment, 2)];
+        
+        GroceryList* list = [[GroceryList alloc] initWithName:name];
+        list.dateCreated = dateCreated;
+        list.listOfItems = [self loadItemsGivenItemId:itemIds];
+        [lists addObject:list];
+        
+    }
+    sqlite3_finalize(loadListStatment);
+    sqlite3_close(groceryDB);
+    return lists;
+}
+/*-(NSMutableArray*)loadLists
 {
     const char* dbpath = [databasePath UTF8String];
     sqlite3_stmt* loadListStatment;
@@ -137,9 +168,9 @@
     sqlite3_finalize(loadListStatment);
     sqlite3_close(groceryDB);
     return lists;
-}
+}*/
 
-- (void)saveLists:(NSArray*)lists
+- (void)saveLists:(NSArray*)lists whichToSave:(NSString *)whichToSave
 {
     sqlite3_stmt* insertListsStatement;
     
@@ -157,22 +188,53 @@
         NSString* dateCreated = list.dateCreated;
         NSString* itemIds = [self getItemListString:list];
         NSString* insertListSQL =
-            [NSString stringWithFormat: @"INSERT INTO List (name, datecreated, item_ids) VALUES (\"%@\", \"%@\", \"%@\")", name, dateCreated, itemIds];
+            [NSString stringWithFormat: @"INSERT INTO %@ (name, datecreated, item_ids) VALUES (\"%@\", \"%@\", \"%@\")", whichToSave, name, dateCreated, itemIds];
        
         const char* insertList = [insertListSQL UTF8String];
         
         sqlite3_prepare_v2(groceryDB, insertList, -1, &insertListsStatement, NULL);
-        if (sqlite3_step(insertListsStatement) == SQLITE_DONE)
+        if (sqlite3_step(insertListsStatement) != SQLITE_DONE)
         {
         }
-        else
-        {
-            //lol
-        }
+        
         sqlite3_finalize(insertListsStatement);
         sqlite3_close(groceryDB);
     }
 }
+
+- (void)saveRecipes:(NSArray*)lists
+{
+    sqlite3_stmt* insertListsStatement;
+    
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &groceryDB) != SQLITE_OK)
+    {
+        return;
+    }
+    
+    for(int i = 0; i < lists.count; i++)
+    {
+        GroceryList* list = lists[0];
+        NSString* name = list.name;
+        NSString* dateCreated = list.dateCreated;
+        NSString* itemIds = [self getItemListString:list];
+        NSString* insertListSQL =
+        [NSString stringWithFormat: @"INSERT INTO List (name, datecreated, item_ids) VALUES (\"%@\", \"%@\", \"%@\")", name, dateCreated, itemIds];
+        
+        const char* insertList = [insertListSQL UTF8String];
+        
+        sqlite3_prepare_v2(groceryDB, insertList, -1, &insertListsStatement, NULL);
+        if (sqlite3_step(insertListsStatement) != SQLITE_DONE)
+        {
+        }
+        
+        sqlite3_finalize(insertListsStatement);
+        sqlite3_close(groceryDB);
+    }
+}
+
+
 
 -(void)saveItems:(NSMutableArray*)items
 {
@@ -281,9 +343,4 @@
     return items;
 }
 
-
--(void)save:(NSDictionary*)data
-{
-
-}
 @end
