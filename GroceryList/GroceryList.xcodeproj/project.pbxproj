@@ -15,6 +15,7 @@
 		5B1C004D16E45042006986BA /* RecipeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C004B16E45042006986BA /* RecipeListViewController.xib */; };
 		5B1C005116E455C2006986BA /* AddRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C004F16E455C1006986BA /* AddRecipeViewController.m */; };
 		5B1C005216E455C2006986BA /* AddRecipeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C005016E455C1006986BA /* AddRecipeViewController.xib */; };
+		5B569A8717067F2000F534CA /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B569A8617067F2000F534CA /* ListViewController.m */; };
 		5B87A80916E2CAAC003D7E6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B87A80816E2CAAC003D7E6B /* UIKit.framework */; };
 		5B87A80B16E2CAAC003D7E6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B87A80A16E2CAAC003D7E6B /* Foundation.framework */; };
 		5B87A80D16E2CAAC003D7E6B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B87A80C16E2CAAC003D7E6B /* CoreGraphics.framework */; };
@@ -52,6 +53,9 @@
 		5B1C004E16E455C1006986BA /* AddRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRecipeViewController.h; sourceTree = "<group>"; };
 		5B1C004F16E455C1006986BA /* AddRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRecipeViewController.m; sourceTree = "<group>"; };
 		5B1C005016E455C1006986BA /* AddRecipeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddRecipeViewController.xib; sourceTree = "<group>"; };
+		5B569A8517067F2000F534CA /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		5B569A8617067F2000F534CA /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		5B569A911706916400F534CA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5B87A80416E2CAAC003D7E6B /* GroceryList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B87A80816E2CAAC003D7E6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5B87A80A16E2CAAC003D7E6B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +108,7 @@
 		5B87A7F916E2CAAC003D7E6B = {
 			isa = PBXGroup;
 			children = (
+				5B569A911706916400F534CA /* CoreData.framework */,
 				5B87A80E16E2CAAC003D7E6B /* GroceryList */,
 				5B87A80716E2CAAC003D7E6B /* Frameworks */,
 				5B87A80516E2CAAC003D7E6B /* Products */,
@@ -196,6 +201,8 @@
 				5BAA8CEC1700081D002F4613 /* ItemListViewController.h */,
 				5BAA8CED1700081D002F4613 /* ItemListViewController.m */,
 				5BAA8CEE1700081D002F4613 /* ItemListViewController.xib */,
+				5B569A8517067F2000F534CA /* ListViewController.h */,
+				5B569A8617067F2000F534CA /* ListViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -288,6 +295,7 @@
 				5BA81F3F16F6D4960020A4DC /* GroceryList.m in Sources */,
 				5BBEFE2D16FAAEED001F429F /* ShowRecipeViewController.m in Sources */,
 				5BAA8CEF1700081D002F4613 /* ItemListViewController.m in Sources */,
+				5B569A8717067F2000F534CA /* ListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

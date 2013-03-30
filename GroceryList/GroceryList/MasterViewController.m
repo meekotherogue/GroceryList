@@ -78,10 +78,11 @@
     for(int i = 0; i < list.listOfItems.count; i++)
     {
         GroceryItem* item =list.listOfItems[i];
-        NSString* itemName = item.name;
-        if(!_allItems[itemName])
+        NSString* itemKey = item.key;
+        GroceryItem* existingItem = _allItems[itemKey];
+        if(!existingItem)
         {
-            [_allItems setObject:list.listOfItems[i] forKey:itemName];
+            [_allItems setObject:list.listOfItems[i] forKey:item.name];
         }
     }
 }
@@ -96,9 +97,17 @@
     [self addItemsFromList:list];
 }
 //ListSelected delegate
--(void)listSelected:(int)listID
+-(void)listsSelected:(NSMutableArray*)lists
 {
-    _currentList = _allLists[listID];
+    for (int i = 0; i < lists.count; i++)
+    {
+        GroceryList* curList = lists[i];
+        for(int j = 0; j < curList.listOfItems.count; j++)
+        {
+            GroceryItem* item = curList.listOfItems[j];
+            [_currentList addItem:item];
+        }
+    }
 }
 //RecipesSelected delegate
 -(void)recipeSelected:(int)recipeId
@@ -230,6 +239,7 @@
         self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
         self.currentListViewController.delegate = self;
         self.currentListViewController.currentList = _currentList;
+
         [ self.navigationController pushViewController:self.currentListViewController animated:YES];
     }
     //Create list view
@@ -260,7 +270,10 @@
         self.listViewController = [[ListsViewController alloc] initWithNibName:@"ListsViewController" bundle:nil];
         self.listViewController.delegate = self;
         self.listViewController.allLists = _allLists;
-        [ self presentViewController:self.listViewController animated:YES completion:^{
+        UINavigationController* nav =[[UINavigationController alloc]initWithRootViewController:self.listViewController];
+//        nav.navigationBarHidden = YES;
+        
+        [ self presentViewController:nav animated:YES completion:^{
             //Blah
         }];
     }

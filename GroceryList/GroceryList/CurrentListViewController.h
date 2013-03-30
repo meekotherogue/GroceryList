@@ -11,8 +11,11 @@
 #import "GroceryItem.h"
 
 @interface CurrentListViewController : UITableViewController
-@property(nonatomic,assign)id delegate;
 
+@property(nonatomic,assign)id delegate;
 @property(nonatomic,assign)GroceryList* currentList;
+
+-(GroceryList*)getList;
+-(void)setList:(GroceryList*) list;
 
 @end

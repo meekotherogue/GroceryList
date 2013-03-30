@@ -11,7 +11,6 @@
 @interface CurrentListViewController ()
 
 @end
-
 @implementation CurrentListViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -40,6 +39,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(GroceryList*)getList
+{
+    return self.currentList;
+}
+
+-(void)setList:(GroceryList*) list
+{
+    self.currentList = list;
 }
 
 #pragma mark - Table view data source
@@ -121,6 +130,18 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell.accessoryType == UITableViewCellAccessoryCheckmark)
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

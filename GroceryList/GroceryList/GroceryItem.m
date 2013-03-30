@@ -17,6 +17,7 @@
     if(self != nil)
     {
         self.name = name;
+        self.key = [name lowercaseString];
     }
     return (self);
 }

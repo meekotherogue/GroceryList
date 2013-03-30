@@ -8,6 +8,7 @@
 
 #import "ListsViewController.h"
 #import "GroceryList.h"
+#import "ListViewController.h"
 
 @interface ListsViewController ()
 
@@ -30,6 +31,10 @@ NSIndexPath* _currentSelection;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(backPressed:)];
+    self.navigationItem.leftBarButtonItem = doneButton;
+    self.navigationItem.title = @"My Lists";
+    self.listsToAddToCurrent = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,15 +43,17 @@ NSIndexPath* _currentSelection;
     // Dispose of any resources that can be recreated.
 }
 
+-(void)addList:(GroceryList*)list
+{
+    [self.listsToAddToCurrent addObject:list];
+}
+
 -(IBAction)backPressed:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
-    if([delegate respondsToSelector:@selector(listSelected:)])
+    if([delegate respondsToSelector:@selector(listsSelected:)])
     {
-        if(_currentSelection != nil)
-        {
-            [delegate listSelected:_currentSelection.row];
-        }
+        [delegate listsSelected:self.listsToAddToCurrent];
     }
 }
 
@@ -72,16 +79,12 @@ NSIndexPath* _currentSelection;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(_currentSelection != nil)
-    {
-        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:_currentSelection];
-        currentCell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    _currentSelection = indexPath;
+    ListViewController* listViewController = [[ListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
+    listViewController.delegate = self;
+    GroceryList* listToSet = _allLists[indexPath.row];
+    [listViewController setList:listToSet];
+    [self.navigationController pushViewController:listViewController animated:YES];
 }
 @end

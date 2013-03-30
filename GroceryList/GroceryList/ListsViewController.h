@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol ListSelectedDelegate
 @required
--(void)listSelected:(int)listID;
+-(void)listsSelected:(NSMutableArray*)lists;
 @end
 
 @interface ListsViewController : UIViewController
@@ -18,4 +18,5 @@
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
 -(IBAction)backPressed:(id)sender;
 @property(nonatomic, strong)NSMutableArray* allLists;
+@property(nonatomic, strong)NSMutableArray* listsToAddToCurrent;
 @end
