@@ -15,6 +15,7 @@
 #import "RecipeListViewController.h"
 #import "AddRecipeViewController.h"
 #import "GroceryList.h"
+#import "DatabaseHelper.h"
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -46,15 +47,17 @@
 	// Do any additional setup after loading the view, typically from a nib.
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TitlePage" ofType:@"plist"];
     _tableData = [NSArray arrayWithContentsOfFile:filePath];
-    _allLists = [[NSMutableArray alloc] initWithCapacity:0];
-    _allRecipes = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    self.databaseHelper = [[DatabaseHelper alloc] init];
     
     //TODO: load from phone, items that already exist
+    _allLists = [[NSMutableArray alloc] initWithCapacity:0];
+    _allRecipes = [[NSMutableArray alloc] initWithCapacity:0];
     _allItems = [[NSMutableDictionary alloc] initWithCapacity:0];
-    
-    //TESTLIST //Actually look in memory
-    //currentList = [NSArray alloc];
-    //currentList = [NSArray arrayWithObjects:@"first", @"second", @"third" , nil];
+
+    _allItems = [self.databaseHelper loadItems];
+    _allLists = [self.databaseHelper loadLists];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,6 +78,7 @@
 
 -(void)addItemsFromList:(GroceryList*)list
 {
+    NSMutableArray* itemsToAdd = [[NSMutableArray alloc] initWithCapacity:0];
     for(int i = 0; i < list.listOfItems.count; i++)
     {
         GroceryItem* item =list.listOfItems[i];
@@ -83,8 +87,10 @@
         if(!existingItem)
         {
             [_allItems setObject:list.listOfItems[i] forKey:item.name];
+            [itemsToAdd addObject:item];
         }
     }
+    [self.databaseHelper saveItems:itemsToAdd];
 }
 
 //Delegates
@@ -93,6 +99,10 @@
 {
     _currentList = list;
     [_allLists addObject:list];
+    
+    NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
+    [listArray addObject:list];
+    [self.databaseHelper saveLists:listArray];
     
     [self addItemsFromList:list];
 }
@@ -225,7 +235,7 @@
     //Show current list
     if(index == 0)
     {
-        if(_currentList == nil)
+        if(_allLists.count <= 0)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No lists entered"
                                                             message:@"You must enter a list into the app before you can view one.  Please go to \"Create List\" and enter your list."

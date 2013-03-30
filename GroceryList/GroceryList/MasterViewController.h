@@ -14,16 +14,18 @@
 #import "AddRecipeViewController.h"
 #import "ShowRecipeViewController.h"
 #import "ItemListViewController.h"
+#import "DatabaseHelper.h"
 //@class DetailViewController;
 
 @interface MasterViewController : UITableViewController
 
 //@property (strong, nonatomic) DetailViewController *detailViewController;
-@property (strong, nonatomic) CreateListViewController *createListViewController;
-@property (strong, nonatomic) CurrentListViewController *currentListViewController;
-@property (strong, nonatomic) ListsViewController *listViewController;
-@property (strong, nonatomic) RecipeListViewController *recipeListViewController;
-@property (strong, nonatomic) ShowRecipeViewController *showRecipeViewController;
-@property (strong, nonatomic) ItemListViewController *itemListViewController;
+@property (strong, nonatomic) CreateListViewController* createListViewController;
+@property (strong, nonatomic) CurrentListViewController* currentListViewController;
+@property (strong, nonatomic) ListsViewController* listViewController;
+@property (strong, nonatomic) RecipeListViewController* recipeListViewController;
+@property (strong, nonatomic) ShowRecipeViewController* showRecipeViewController;
+@property (strong, nonatomic) ItemListViewController* itemListViewController;
+@property (strong, nonatomic) DatabaseHelper* databaseHelper;
 
 @end

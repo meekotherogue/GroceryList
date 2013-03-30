@@ -38,6 +38,8 @@
 		5BAA8CF01700081D002F4613 /* ItemListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BAA8CEE1700081D002F4613 /* ItemListViewController.xib */; };
 		5BBEFE2D16FAAEED001F429F /* ShowRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBEFE2B16FAAEED001F429F /* ShowRecipeViewController.m */; };
 		5BBEFE2E16FAAEED001F429F /* ShowRecipeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BBEFE2C16FAAEED001F429F /* ShowRecipeViewController.xib */; };
+		5BDA905C1706A7380001BDE3 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA905B1706A7380001BDE3 /* DatabaseHelper.m */; };
+		5BDA90671706B3D50001BDE3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA90661706B3D50001BDE3 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +57,6 @@
 		5B1C005016E455C1006986BA /* AddRecipeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddRecipeViewController.xib; sourceTree = "<group>"; };
 		5B569A8517067F2000F534CA /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		5B569A8617067F2000F534CA /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
-		5B569A911706916400F534CA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5B87A80416E2CAAC003D7E6B /* GroceryList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B87A80816E2CAAC003D7E6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5B87A80A16E2CAAC003D7E6B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -89,6 +90,9 @@
 		5BBEFE2A16FAAEED001F429F /* ShowRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowRecipeViewController.h; sourceTree = "<group>"; };
 		5BBEFE2B16FAAEED001F429F /* ShowRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowRecipeViewController.m; sourceTree = "<group>"; };
 		5BBEFE2C16FAAEED001F429F /* ShowRecipeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowRecipeViewController.xib; sourceTree = "<group>"; };
+		5BDA905A1706A7380001BDE3 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
+		5BDA905B1706A7380001BDE3 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
+		5BDA90661706B3D50001BDE3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BDA90671706B3D50001BDE3 /* libsqlite3.dylib in Frameworks */,
 				5B87A80916E2CAAC003D7E6B /* UIKit.framework in Frameworks */,
 				5B87A80B16E2CAAC003D7E6B /* Foundation.framework in Frameworks */,
 				5B87A80D16E2CAAC003D7E6B /* CoreGraphics.framework in Frameworks */,
@@ -108,7 +113,7 @@
 		5B87A7F916E2CAAC003D7E6B = {
 			isa = PBXGroup;
 			children = (
-				5B569A911706916400F534CA /* CoreData.framework */,
+				5BDA90661706B3D50001BDE3 /* libsqlite3.dylib */,
 				5B87A80E16E2CAAC003D7E6B /* GroceryList */,
 				5B87A80716E2CAAC003D7E6B /* Frameworks */,
 				5B87A80516E2CAAC003D7E6B /* Products */,
@@ -173,6 +178,8 @@
 				5BA81F2A16F6CDEC0020A4DC /* GroceryItem.m */,
 				5BA81F3D16F6D4960020A4DC /* GroceryList.h */,
 				5BA81F3E16F6D4960020A4DC /* GroceryList.m */,
+				5BDA905A1706A7380001BDE3 /* DatabaseHelper.h */,
+				5BDA905B1706A7380001BDE3 /* DatabaseHelper.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -296,6 +303,7 @@
 				5BBEFE2D16FAAEED001F429F /* ShowRecipeViewController.m in Sources */,
 				5BAA8CEF1700081D002F4613 /* ItemListViewController.m in Sources */,
 				5B569A8717067F2000F534CA /* ListViewController.m in Sources */,
+				5BDA905C1706A7380001BDE3 /* DatabaseHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
