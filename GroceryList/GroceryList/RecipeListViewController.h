@@ -11,7 +11,7 @@
 @protocol AddRecipeDelegate
 @required
 -(void)recipesAdded:(NSMutableArray*)list;
--(void)recipeSelected:(int)recipeId;
+-(void)recipeSelected:(NSMutableArray*)recipes;
 @end
 
 @interface RecipeListViewController : UIViewController
@@ -20,6 +20,7 @@
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
 @property (strong, nonatomic) AddRecipeViewController *addRecipeViewController;
 @property(nonatomic, strong)NSMutableArray* allRecipes;
+@property(nonatomic, strong)NSMutableArray* recipesToAddToCurrent;
 
 -(IBAction)backPressed:(id)sender;
 -(IBAction)addPressed:(id)sender;

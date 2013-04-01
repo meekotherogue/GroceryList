@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Martina Nagy. All rights reserved.
 //
 
+#import "ShowRecipeViewController.h"
 #import "RecipeListViewController.h"
 #import "GroceryList.h"
 
@@ -35,6 +36,13 @@ NSMutableArray* _newRecipes;
     self.tableView.delegate = self;
     _newRecipes = [[NSMutableArray alloc] initWithCapacity:0];
     _rows = self.allRecipes.count;
+    self.recipesToAddToCurrent =[[NSMutableArray alloc] initWithCapacity:0];
+    
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(backPressed:)];
+    self.navigationItem.leftBarButtonItem = doneButton;
+    UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPressed:)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationItem.title = @"Recipes";
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,6 +65,10 @@ NSMutableArray* _newRecipes;
     _rows = 0;
     self.allRecipes = NULL;
     [self returnLists];
+    if([delegate respondsToSelector:@selector(recipeSelected:)])
+    {
+        [delegate recipeSelected:self.recipesToAddToCurrent];
+    }
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -69,6 +81,11 @@ NSMutableArray* _newRecipes;
     }];
 }
 //End Actions
+
+-(void)addRecipe:(GroceryList*)list
+{
+    [self.recipesToAddToCurrent addObject:list];
+}
 
 -(void)returnLists
 {
@@ -102,13 +119,20 @@ NSMutableArray* _newRecipes;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
-    _rows=0;
-    self.allRecipes =NULL;
-    [self dismissModalViewControllerAnimated:NO];
-    if([delegate respondsToSelector:@selector(recipeSelected:)])
+
+    /*if([delegate respondsToSelector:@selector(recipeSelected:)])
     {
         [self returnLists];
         [delegate recipeSelected:indexPath.row];
-    }
+    }*/
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ShowRecipeViewController* showRecipeViewController = [[ShowRecipeViewController alloc] initWithNibName:@"ShowRecipeViewController" bundle:nil];
+    showRecipeViewController.delegate = self;
+    GroceryList* recipeToSet = _allRecipes[indexPath.row];
+    [showRecipeViewController setList:recipeToSet];
+    [self.navigationController pushViewController:showRecipeViewController animated:YES];
+    
 }
 @end

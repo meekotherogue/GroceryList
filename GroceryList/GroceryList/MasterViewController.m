@@ -57,7 +57,7 @@
 
     _allItems = [self.databaseHelper loadItems];
     _allLists = [self.databaseHelper loadLists:@"List"];
-    //_allRecipes = [self.databaseHelper loadLists:@"Recipe"];
+    _allRecipes = [self.databaseHelper loadLists:@"Recipe"];
 
 }
 
@@ -126,39 +126,35 @@
     }
 }
 //RecipesSelected delegate
--(void)recipeSelected:(int)recipeId
+-(void)recipeSelected:(NSMutableArray*)recipes
 {
-    _currentRecipe = _allRecipes[recipeId];
-    self.showRecipeViewController = NULL;
-    self.showRecipeViewController = [[ShowRecipeViewController alloc] initWithNibName:@"ShowRecipeViewController" bundle:nil];
-    self.showRecipeViewController.delegate = self;
-    self.showRecipeViewController.recipeToShow = _allRecipes[recipeId];
-    
-    [ self.navigationController pushViewController:self.showRecipeViewController animated:NO];
-}
-//Delegate for adding what's on the current recipe to the current list
--(void)addRecipeToCurrentList:(int)dum
-{
-    if(!_currentList.listOfItems || !_currentList.listOfItems.count)
+    for(int i = 0; i < recipes.count; i++)
     {
-        _currentList = [[GroceryList alloc] initWithName:_currentRecipe.name];
-        [_allLists addObject:_currentRecipe];
-        
-    }
-    for(int i=0; i < _currentRecipe.listOfItems.count; i++)
-    {
-        GroceryItem* item = _currentRecipe.listOfItems[i];
-        [_currentList addItem:item];
+        GroceryList* recipe = recipes[i];
+        if(_currentList == nil)
+        {
+            _currentList = recipe;
+            continue;
+        }
+        for(int j = 0; j < recipe.listOfItems.count; j++)
+        {
+            GroceryItem* item = recipe.listOfItems[j];
+            [_currentList addItem:item];
+        }
     }
 }
+
 //Delegate for adding the recipe items to the list of all items
 -(void)recipesAdded:(NSMutableArray*)list
 {
+    NSMutableArray* recipeArray = [[NSMutableArray alloc] initWithCapacity:0];
     for (int i = 0; i < list.count; i++)
     {
-        GroceryList* curList = list[i];
-        [self addItemsFromList:curList];
+        GroceryList* curRecipe = list[i];
+        [self addItemsFromList:curRecipe];
+        [recipeArray addObject:curRecipe];
     }
+    [self.databaseHelper saveLists:recipeArray whichToSave:@"Recipe"];
 }
 //Add Items to list delegate
 -(void)addItems:(NSMutableArray*)items
@@ -243,6 +239,16 @@
     {
         if(_currentList == nil)
         {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No list selected"
+                                                            message:@"You must select or create a list in order to set the Current List"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        if(_allLists.count <= 0 && _allRecipes <= 0)
+        {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No lists entered"
                                                             message:@"You must enter a list into the app before you can view one.  Please go to \"Create List\" and enter your list."
                                                            delegate:nil
@@ -251,10 +257,11 @@
             [alert show];
             return;
         }
+        
 
         self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
         self.currentListViewController.delegate = self;
-        self.currentListViewController.currentList = _currentList;
+        [self.currentListViewController setList:_currentList];
 
         [ self.navigationController pushViewController:self.currentListViewController animated:YES];
     }
@@ -280,14 +287,12 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
-            //return;
         }
 
         self.listViewController = [[ListsViewController alloc] initWithNibName:@"ListsViewController" bundle:nil];
         self.listViewController.delegate = self;
         self.listViewController.allLists = _allLists;
         UINavigationController* nav =[[UINavigationController alloc]initWithRootViewController:self.listViewController];
-//        nav.navigationBarHidden = YES;
         
         [ self presentViewController:nav animated:YES completion:^{
             //Blah
@@ -300,8 +305,9 @@
         self.recipeListViewController = [[RecipeListViewController alloc] initWithNibName:@"RecipeListViewController" bundle:nil];
         self.recipeListViewController.delegate = self;
         self.recipeListViewController.allRecipes = _allRecipes;
+        UINavigationController* nav =[[UINavigationController alloc]initWithRootViewController:self.recipeListViewController];
 
-        [ self presentViewController:self.recipeListViewController animated:YES completion:^{
+        [ self presentViewController:nav animated:YES completion:^{
             /*if (!self.addRecipeViewController)
             {
                 self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];

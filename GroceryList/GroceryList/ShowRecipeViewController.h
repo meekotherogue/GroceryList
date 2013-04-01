@@ -10,7 +10,7 @@
 #import "GroceryList.h"
 @protocol ShowRecipeDelegate
 @required
--(void)addRecipeToCurrentList:(int)dum;
+-(void)addRecipe:(GroceryList*)list;
 @end
 
 
@@ -18,4 +18,7 @@
 @property (nonatomic,strong) GroceryList* recipeToShow;
 @property(nonatomic,assign)id delegate;
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
+
+-(GroceryList*)getList;
+-(void)setList:(GroceryList*) list;
 @end

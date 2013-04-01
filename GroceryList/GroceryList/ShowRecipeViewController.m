@@ -43,10 +43,28 @@
 
 -(void)selectRecipe
 {
-    if([delegate respondsToSelector:@selector(addRecipeToCurrentList:)])
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Add Recipe" message:@"Are you sure you want to add this recipe's items to your Current List?" delegate:self cancelButtonTitle:@"Cancel"otherButtonTitles:@"Ok", nil];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1)
     {
-        [delegate addRecipeToCurrentList:9];
+        if([delegate respondsToSelector:@selector(addRecipe:)])
+        {
+            [delegate addRecipe:self.recipeToShow];
+        }
     }
+}
+
+-(GroceryList*)getList
+{
+    return self.recipeToShow;
+}
+
+-(void)setList:(GroceryList*) list
+{
+    self.recipeToShow = list;
 }
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
