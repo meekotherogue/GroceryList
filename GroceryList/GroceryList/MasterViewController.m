@@ -17,6 +17,7 @@
 #import "GroceryList.h"
 #import "DatabaseHelper.h"
 
+
 @interface MasterViewController () {
     NSMutableArray *_objects;
     NSArray* _tableData;
@@ -26,15 +27,43 @@
     NSMutableArray* _allRecipes;
     NSMutableDictionary* _allItems;
 }
+@property(nonatomic,readwrite,strong) BZFoursquare *foursquare;
+@property(nonatomic,strong) BZFoursquareRequest *request;
+@property(nonatomic,copy) NSDictionary *meta;
+@property(nonatomic,copy) NSArray *notifications;
+@property(nonatomic,copy) NSDictionary *response;
+- (void)updateView;
+- (void)cancelRequest;
+- (void)prepareForRequest;
+- (void)searchVenues;
+- (void)checkin;
 @end
 
 @implementation MasterViewController
+@synthesize foursquare = foursquare_;
+@synthesize request = request_;
+@synthesize meta = meta_;
+@synthesize notifications = notifications_;
+@synthesize response = response_;
+const NSString* kClientID = @"2QEASHX551GMJR211GJ2GK5GMWNNYWOZ3OJE0FTGYWMGJ5VT";
+const NSString* kCallbackURL = @"groclist://grocerylist";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Master", @"Master");
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.foursquare = [[BZFoursquare alloc] initWithClientID:kClientID callbackURL:kCallbackURL];
+        foursquare_.version = @"20111119";
+        foursquare_.locale = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+        foursquare_.sessionDelegate = self;
     }
     return self;
 }

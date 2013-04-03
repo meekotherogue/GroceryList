@@ -15,11 +15,18 @@
 #import "ShowRecipeViewController.h"
 #import "ItemListViewController.h"
 #import "DatabaseHelper.h"
-//@class DetailViewController;
+#import "BZFoursquare.h"
 
-@interface MasterViewController : UITableViewController
+@interface MasterViewController : UITableViewController<BZFoursquareRequestDelegate, BZFoursquareSessionDelegate> {
+    BZFoursquare        *foursquare_;
+    BZFoursquareRequest *request_;
+    NSDictionary        *meta_;
+    NSArray             *notifications_;
+    NSDictionary        *response_;
+}
 
-//@property (strong, nonatomic) DetailViewController *detailViewController;
+@property(nonatomic,readonly,strong) BZFoursquare *foursquare;
+
 @property (strong, nonatomic) CreateListViewController* createListViewController;
 @property (strong, nonatomic) CurrentListViewController* currentListViewController;
 @property (strong, nonatomic) ListsViewController* listViewController;

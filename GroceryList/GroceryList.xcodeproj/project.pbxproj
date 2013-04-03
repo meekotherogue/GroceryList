@@ -40,6 +40,9 @@
 		5BBEFE2E16FAAEED001F429F /* ShowRecipeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BBEFE2C16FAAEED001F429F /* ShowRecipeViewController.xib */; };
 		5BDA905C1706A7380001BDE3 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA905B1706A7380001BDE3 /* DatabaseHelper.m */; };
 		5BDA90671706B3D50001BDE3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA90661706B3D50001BDE3 /* libsqlite3.dylib */; };
+		5BDA90901709427F0001BDE3 /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA908D1709427F0001BDE3 /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5BDA90911709427F0001BDE3 /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA908F1709427F0001BDE3 /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5BDA9094170942EE0001BDE3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA9093170942EE0001BDE3 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +96,11 @@
 		5BDA905A1706A7380001BDE3 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
 		5BDA905B1706A7380001BDE3 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
 		5BDA90661706B3D50001BDE3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		5BDA908C1709427F0001BDE3 /* BZFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquare.h; sourceTree = "<group>"; };
+		5BDA908D1709427F0001BDE3 /* BZFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquare.m; sourceTree = "<group>"; };
+		5BDA908E1709427F0001BDE3 /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquareRequest.h; sourceTree = "<group>"; };
+		5BDA908F1709427F0001BDE3 /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquareRequest.m; sourceTree = "<group>"; };
+		5BDA9093170942EE0001BDE3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BDA9094170942EE0001BDE3 /* MobileCoreServices.framework in Frameworks */,
 				5BDA90671706B3D50001BDE3 /* libsqlite3.dylib in Frameworks */,
 				5B87A80916E2CAAC003D7E6B /* UIKit.framework in Frameworks */,
 				5B87A80B16E2CAAC003D7E6B /* Foundation.framework in Frameworks */,
@@ -113,6 +122,8 @@
 		5B87A7F916E2CAAC003D7E6B = {
 			isa = PBXGroup;
 			children = (
+				5BDA9093170942EE0001BDE3 /* MobileCoreServices.framework */,
+				5BDA908B1709427F0001BDE3 /* BZFoursquare */,
 				5BDA90661706B3D50001BDE3 /* libsqlite3.dylib */,
 				5B87A80E16E2CAAC003D7E6B /* GroceryList */,
 				5B87A80716E2CAAC003D7E6B /* Frameworks */,
@@ -214,6 +225,18 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		5BDA908B1709427F0001BDE3 /* BZFoursquare */ = {
+			isa = PBXGroup;
+			children = (
+				5BDA908C1709427F0001BDE3 /* BZFoursquare.h */,
+				5BDA908D1709427F0001BDE3 /* BZFoursquare.m */,
+				5BDA908E1709427F0001BDE3 /* BZFoursquareRequest.h */,
+				5BDA908F1709427F0001BDE3 /* BZFoursquareRequest.m */,
+			);
+			name = BZFoursquare;
+			path = "../foursquare-ios-api/BZFoursquare";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -304,6 +327,8 @@
 				5BAA8CEF1700081D002F4613 /* ItemListViewController.m in Sources */,
 				5B569A8717067F2000F534CA /* ListViewController.m in Sources */,
 				5BDA905C1706A7380001BDE3 /* DatabaseHelper.m in Sources */,
+				5BDA90901709427F0001BDE3 /* BZFoursquare.m in Sources */,
+				5BDA90911709427F0001BDE3 /* BZFoursquareRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +415,8 @@
 		5B87A82F16E2CAAC003D7E6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FOURSQUARE_CALLBACK_URL = "groclist://grocerylist";
+				FOURSQUARE_CLIENT_ID = 2QEASHX551GMJR211GJ2GK5GMWNNYWOZ3OJE0FTGYWMGJ5VT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GroceryList/GroceryList-Prefix.pch";
 				INFOPLIST_FILE = "GroceryList/GroceryList-Info.plist";
@@ -402,6 +429,8 @@
 		5B87A83016E2CAAC003D7E6B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FOURSQUARE_CALLBACK_URL = "groclist://grocerylist";
+				FOURSQUARE_CLIENT_ID = 2QEASHX551GMJR211GJ2GK5GMWNNYWOZ3OJE0FTGYWMGJ5VT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GroceryList/GroceryList-Prefix.pch";
 				INFOPLIST_FILE = "GroceryList/GroceryList-Info.plist";
