@@ -75,7 +75,29 @@
     
     // Configure the cell...
     GroceryItem* item = self.currentList.listOfItems[indexPath.row];
-    cell.textLabel.text = item.name;
+    if([item.locationName length] != 0)
+    {
+        cell.textLabel.numberOfLines = 3;
+        cell.textLabel.font = [UIFont systemFontOfSize:12.0];
+        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        
+        /*UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(45.0, 5, 100.0, 35.0)];
+        [title setFont:[UIFont fontWithName:@"Helvetica" size:16.0]];
+        title.text = item.name;
+        [cell.contentView addSubview:title];
+        
+        UILabel *location = [[UILabel alloc] initWithFrame:CGRectMake(45.0, 5, 100.0, 35.0)];
+        [location setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
+        location.text = item.locationName;
+        [cell.contentView addSubview:location];*/
+        cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@",item.name,item.locationName];
+    }
+    else
+    {
+        cell.textLabel.text = item.name;
+    }
+    
+
     
     return cell;
 }
@@ -123,13 +145,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     if(cell.accessoryType == UITableViewCellAccessoryCheckmark)
     {

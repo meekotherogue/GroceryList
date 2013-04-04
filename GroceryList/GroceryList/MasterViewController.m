@@ -28,31 +28,36 @@
     NSMutableDictionary* _allItems;
 }
 @property(nonatomic,readwrite,strong) BZFoursquare *foursquare;
-@property(nonatomic,strong) BZFoursquareRequest *request;
+/*@property(nonatomic,strong) BZFoursquareRequest *request;
 @property(nonatomic,copy) NSDictionary *meta;
 @property(nonatomic,copy) NSArray *notifications;
-@property(nonatomic,copy) NSDictionary *response;
-- (void)updateView;
+@property(nonatomic,copy) NSDictionary *response;*/
+/*- (void)updateView;
 - (void)cancelRequest;
 - (void)prepareForRequest;
 - (void)searchVenues;
-- (void)checkin;
+- (void)checkin;*/
 @end
 
 @implementation MasterViewController
 @synthesize foursquare = foursquare_;
-@synthesize request = request_;
+/*@synthesize request = request_;
 @synthesize meta = meta_;
 @synthesize notifications = notifications_;
-@synthesize response = response_;
-const NSString* kClientID = @"2QEASHX551GMJR211GJ2GK5GMWNNYWOZ3OJE0FTGYWMGJ5VT";
-const NSString* kCallbackURL = @"groclist://grocerylist";
+@synthesize response = response_;*/
+
+//const NSString* kClientID = @"2QEASHX551GMJR211GJ2GK5GMWNNYWOZ3OJE0FTGYWMGJ5VT";
+//const NSString* kCallbackURL = @"groclist://grocerylist";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Master", @"Master");
+       /* self.foursquare = [[BZFoursquare alloc] initWithClientID:kClientID callbackURL:kCallbackURL];
+        foursquare_.version = @"20111119";
+        foursquare_.locale = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+        foursquare_.sessionDelegate = self;*/
     }
     return self;
 }
@@ -60,10 +65,7 @@ const NSString* kCallbackURL = @"groclist://grocerylist";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.foursquare = [[BZFoursquare alloc] initWithClientID:kClientID callbackURL:kCallbackURL];
-        foursquare_.version = @"20111119";
-        foursquare_.locale = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
-        foursquare_.sessionDelegate = self;
+
     }
     return self;
 }
@@ -87,7 +89,6 @@ const NSString* kCallbackURL = @"groclist://grocerylist";
     _allItems = [self.databaseHelper loadItems];
     _allLists = [self.databaseHelper loadLists:@"List"];
     _allRecipes = [self.databaseHelper loadLists:@"Recipe"];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -194,17 +195,30 @@ const NSString* kCallbackURL = @"groclist://grocerylist";
         [_currentList addItem:item];
     }
 }
+-(void)checkInCompleted:(NSMutableDictionary*)venue
+{
+    for(int i = 0; i < _currentList.listOfItems.count; i++)
+    {
+        GroceryItem* curItem = _currentList.listOfItems[i];
+        GroceryItem* itemToUpdate = _allItems[curItem.key];
+        itemToUpdate.venueID[0] = venue[@"id"];
+        itemToUpdate.locationName = venue[@"name"];
+        curItem.venueID[0] = venue[@"id"];
+        curItem.locationName = venue[@"name"];
+    }
+    [self.databaseHelper updateItemsWithLocation:_currentList.listOfItems];
+}
 
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 0) return 1;
+    if(section == 0 || section == 2) return 1;
     else return 4;
 }
 
@@ -219,6 +233,14 @@ const NSString* kCallbackURL = @"groclist://grocerylist";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
+    if(indexPath.section == 2)
+    {
+        NSString *object = _tableData[5];
+        NSString* label = [object description];
+        cell.textLabel.text = label;
+        
+        return cell;
+    }
     NSInteger index = (indexPath.section * 1) + indexPath.row;
     NSString *object = _tableData[index];
     NSString* label = [object description];
@@ -261,7 +283,8 @@ const NSString* kCallbackURL = @"groclist://grocerylist";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger index = (indexPath.section * 1) + indexPath.row;
+    NSInteger index = (indexPath.section == 2) ? 5 : (indexPath.section * 1) + indexPath.row;
+    //NSInteger index = (indexPath.section * 1) + indexPath.row;
     
     //Show current list
     if(index == 0)
@@ -337,16 +360,6 @@ const NSString* kCallbackURL = @"groclist://grocerylist";
         UINavigationController* nav =[[UINavigationController alloc]initWithRootViewController:self.recipeListViewController];
 
         [ self presentViewController:nav animated:YES completion:^{
-            /*if (!self.addRecipeViewController)
-            {
-                self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
-                self.addRecipeViewController.delegate = self;
-                
-                UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector( doneFunc ) ];
-                
-                self.addRecipeViewController.navigationItem.rightBarButtonItem = doneButton;
-            }
-            [self.navigationController pushViewController:self.addRecipeViewController animated:YES];*/
         }];
     }
     //Show all items
@@ -358,6 +371,19 @@ const NSString* kCallbackURL = @"groclist://grocerylist";
         self.itemListViewController.allItems = _allItems;
         
         [ self.navigationController pushViewController:self.itemListViewController animated:YES];
+    }
+    //Check in with Foursquare
+    else if(index == 5)
+    {
+        if(self.checkInViewController == NULL)
+        {
+            self.checkInViewController = [[CheckInViewController alloc] initWithNibName:@"CheckInViewController" bundle:nil];
+        }
+        
+        self.checkInViewController.delegate = self;
+        //ß[self.checkInViewController setFoursquareObject:foursquare_];
+    
+        [ self.navigationController pushViewController:self.checkInViewController animated:YES];
     }
 }
 

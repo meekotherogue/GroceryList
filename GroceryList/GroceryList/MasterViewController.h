@@ -14,15 +14,17 @@
 #import "AddRecipeViewController.h"
 #import "ShowRecipeViewController.h"
 #import "ItemListViewController.h"
+#import "CheckInViewController.h"
+
 #import "DatabaseHelper.h"
 #import "BZFoursquare.h"
 
 @interface MasterViewController : UITableViewController<BZFoursquareRequestDelegate, BZFoursquareSessionDelegate> {
-    BZFoursquare        *foursquare_;
-    BZFoursquareRequest *request_;
+    BZFoursquare* foursquare_;
+/*    BZFoursquareRequest *request_;
     NSDictionary        *meta_;
     NSArray             *notifications_;
-    NSDictionary        *response_;
+    NSDictionary        *response_;*/
 }
 
 @property(nonatomic,readonly,strong) BZFoursquare *foursquare;
@@ -33,6 +35,8 @@
 @property (strong, nonatomic) RecipeListViewController* recipeListViewController;
 @property (strong, nonatomic) ShowRecipeViewController* showRecipeViewController;
 @property (strong, nonatomic) ItemListViewController* itemListViewController;
+@property (strong, nonatomic) CheckInViewController* checkInViewController;
+
 @property (strong, nonatomic) DatabaseHelper* databaseHelper;
 
 @end

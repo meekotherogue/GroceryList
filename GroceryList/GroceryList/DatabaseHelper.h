@@ -20,5 +20,6 @@
 -(NSMutableArray*)loadLists:(NSString*)whichToLoad;
 -(void)saveItems:(NSMutableArray*)items;
 -(NSMutableDictionary*)loadItems;
+-(void)updateItemsWithLocation:(NSMutableArray*)items;
 
 @end

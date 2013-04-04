@@ -18,6 +18,8 @@
     {
         self.name = name;
         self.key = [name lowercaseString];
+        self.locationName = @"";
+        self.venueID = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return (self);
 }

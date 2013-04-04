@@ -43,6 +43,10 @@
 		5BDA90901709427F0001BDE3 /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA908D1709427F0001BDE3 /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5BDA90911709427F0001BDE3 /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA908F1709427F0001BDE3 /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5BDA9094170942EE0001BDE3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA9093170942EE0001BDE3 /* MobileCoreServices.framework */; };
+		5BDA90A6170BB87F0001BDE3 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BDA90A5170BB87F0001BDE3 /* background.png */; };
+		5BDA90AC170BC72A0001BDE3 /* CheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA90AA170BC7290001BDE3 /* CheckInViewController.m */; };
+		5BDA90AD170BC72A0001BDE3 /* CheckInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BDA90AB170BC7290001BDE3 /* CheckInViewController.xib */; };
+		5BDA90B0170BEC150001BDE3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA90AF170BEC150001BDE3 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +105,11 @@
 		5BDA908E1709427F0001BDE3 /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquareRequest.h; sourceTree = "<group>"; };
 		5BDA908F1709427F0001BDE3 /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquareRequest.m; sourceTree = "<group>"; };
 		5BDA9093170942EE0001BDE3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		5BDA90A5170BB87F0001BDE3 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../../../background.png; sourceTree = "<group>"; };
+		5BDA90A9170BC7290001BDE3 /* CheckInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckInViewController.h; sourceTree = "<group>"; };
+		5BDA90AA170BC7290001BDE3 /* CheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInViewController.m; sourceTree = "<group>"; };
+		5BDA90AB170BC7290001BDE3 /* CheckInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckInViewController.xib; sourceTree = "<group>"; };
+		5BDA90AF170BEC150001BDE3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BDA90B0170BEC150001BDE3 /* CoreLocation.framework in Frameworks */,
 				5BDA9094170942EE0001BDE3 /* MobileCoreServices.framework in Frameworks */,
 				5BDA90671706B3D50001BDE3 /* libsqlite3.dylib in Frameworks */,
 				5B87A80916E2CAAC003D7E6B /* UIKit.framework in Frameworks */,
@@ -122,6 +132,7 @@
 		5B87A7F916E2CAAC003D7E6B = {
 			isa = PBXGroup;
 			children = (
+				5BDA90AF170BEC150001BDE3 /* CoreLocation.framework */,
 				5BDA9093170942EE0001BDE3 /* MobileCoreServices.framework */,
 				5BDA908B1709427F0001BDE3 /* BZFoursquare */,
 				5BDA90661706B3D50001BDE3 /* libsqlite3.dylib */,
@@ -152,6 +163,7 @@
 		5B87A80E16E2CAAC003D7E6B /* GroceryList */ = {
 			isa = PBXGroup;
 			children = (
+				5BDA90A8170BB8CF0001BDE3 /* resources */,
 				5B87A83D16E3F600003D7E6B /* View */,
 				5B87A83516E2CE72003D7E6B /* Model */,
 				5B87A81716E2CAAC003D7E6B /* AppDelegate.h */,
@@ -221,6 +233,9 @@
 				5BAA8CEE1700081D002F4613 /* ItemListViewController.xib */,
 				5B569A8517067F2000F534CA /* ListViewController.h */,
 				5B569A8617067F2000F534CA /* ListViewController.m */,
+				5BDA90A9170BC7290001BDE3 /* CheckInViewController.h */,
+				5BDA90AA170BC7290001BDE3 /* CheckInViewController.m */,
+				5BDA90AB170BC7290001BDE3 /* CheckInViewController.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -235,6 +250,14 @@
 			);
 			name = BZFoursquare;
 			path = "../foursquare-ios-api/BZFoursquare";
+			sourceTree = "<group>";
+		};
+		5BDA90A8170BB8CF0001BDE3 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				5BDA90A5170BB87F0001BDE3 /* background.png */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +325,8 @@
 				5B1C005216E455C2006986BA /* AddRecipeViewController.xib in Resources */,
 				5BBEFE2E16FAAEED001F429F /* ShowRecipeViewController.xib in Resources */,
 				5BAA8CF01700081D002F4613 /* ItemListViewController.xib in Resources */,
+				5BDA90A6170BB87F0001BDE3 /* background.png in Resources */,
+				5BDA90AD170BC72A0001BDE3 /* CheckInViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +354,7 @@
 				5BDA905C1706A7380001BDE3 /* DatabaseHelper.m in Sources */,
 				5BDA90901709427F0001BDE3 /* BZFoursquare.m in Sources */,
 				5BDA90911709427F0001BDE3 /* BZFoursquareRequest.m in Sources */,
+				5BDA90AC170BC72A0001BDE3 /* CheckInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
