@@ -102,7 +102,19 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
     }
     GroceryItem* item = allItemsArray[indexPath.row];
-    cell.textLabel.text = item.name;
+    
+    if([item.locationName length] != 0)
+    {
+        cell.textLabel.numberOfLines = 3;
+        cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@",item.name,item.locationName];
+    }
+    else
+    {
+        cell.textLabel.text = item.name;
+    }
     
     return cell;
 }

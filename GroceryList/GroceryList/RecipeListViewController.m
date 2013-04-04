@@ -38,8 +38,6 @@ NSMutableArray* _newRecipes;
     _rows = self.allRecipes.count;
     self.recipesToAddToCurrent =[[NSMutableArray alloc] initWithCapacity:0];
     
-    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(backPressed:)];
-    self.navigationItem.leftBarButtonItem = doneButton;
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPressed:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.navigationItem.title = @"Recipes";

@@ -300,6 +300,7 @@
         if (sqlite3_step(updateItemsStatement) != SQLITE_DONE)
         {
             NSString* fuck = @"";
+            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(groceryDB));
         }
         sqlite3_finalize(updateItemsStatement);
     }

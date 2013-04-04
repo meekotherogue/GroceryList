@@ -346,9 +346,7 @@
         self.listViewController.allLists = _allLists;
         UINavigationController* nav =[[UINavigationController alloc]initWithRootViewController:self.listViewController];
         
-        [ self presentViewController:nav animated:YES completion:^{
-            //Blah
-        }];
+        [ self.navigationController pushViewController:self.listViewController animated:YES ];
     }
     //Show recipes
     else if(index == 3)
@@ -359,8 +357,7 @@
         self.recipeListViewController.allRecipes = _allRecipes;
         UINavigationController* nav =[[UINavigationController alloc]initWithRootViewController:self.recipeListViewController];
 
-        [ self presentViewController:nav animated:YES completion:^{
-        }];
+        [ self.navigationController pushViewController:self.recipeListViewController animated:YES ];
     }
     //Show all items
     else if(index == 4)

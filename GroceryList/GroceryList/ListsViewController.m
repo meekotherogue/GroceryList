@@ -32,9 +32,6 @@ NSIndexPath* _currentSelection;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(backPressed:)];
-    self.navigationItem.leftBarButtonItem = doneButton;
-    self.navigationItem.title = @"My Lists";
     self.listsToAddToCurrent = [[NSMutableArray alloc] initWithCapacity:0];
 }
 

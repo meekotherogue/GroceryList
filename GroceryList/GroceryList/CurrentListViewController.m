@@ -78,7 +78,7 @@
     if([item.locationName length] != 0)
     {
         cell.textLabel.numberOfLines = 3;
-        cell.textLabel.font = [UIFont systemFontOfSize:12.0];
+        cell.textLabel.font = [UIFont systemFontOfSize:14.0];
         cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
         
         /*UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(45.0, 5, 100.0, 35.0)];
