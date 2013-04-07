@@ -16,7 +16,6 @@
 @property(nonatomic,assign)id delegate;
 
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
--(IBAction)backPressed:(id)sender;
 @property(nonatomic, strong)NSMutableArray* allLists;
 @property(nonatomic, strong)NSMutableArray* listsToAddToCurrent;
 @end

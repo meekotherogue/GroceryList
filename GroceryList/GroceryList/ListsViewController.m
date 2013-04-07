@@ -46,13 +46,16 @@ NSIndexPath* _currentSelection;
     [self.listsToAddToCurrent addObject:list];
 }
 
--(IBAction)backPressed:(id)sender
-{
-    [self dismissModalViewControllerAnimated:YES];
-    if([delegate respondsToSelector:@selector(listsSelected:)])
-    {
-        [delegate listsSelected:self.listsToAddToCurrent];
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        if([delegate respondsToSelector:@selector(listsSelected:)])
+        {
+            [delegate listsSelected:self.listsToAddToCurrent];
+        }
     }
+    [super viewWillDisappear:animated];
 }
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
