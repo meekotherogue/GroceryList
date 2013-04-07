@@ -1245,7 +1245,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/ListsViewController.m"
@@ -1255,6 +1255,19 @@
          startingLineNumber = "55"
          endingLineNumber = "55"
          landmarkName = "-viewWillDisappear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/DatabaseHelper.m"
+         timestampString = "387058762.910402"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "289"
+         endingLineNumber = "289"
+         landmarkName = "-updateItemsWithLocation:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

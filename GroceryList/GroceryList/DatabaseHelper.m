@@ -289,20 +289,25 @@
         GroceryItem* item = items[i];
         NSString* locationName = item.locationName;
         NSString* venueIds = [self getVenueIDString:item.venueID];
-        //NSString* itemId = [NSString stringWithFormat: @"%u",item.hash];
         NSString* name = item.name;
-        NSString* updateItemSQL =
-        [NSString stringWithFormat: @"UPDATE Item SET location_name=%@, venue_ids=%@ WHERE name=%@",locationName,venueIds,name];
-        
-        const char* updateItem = [updateItemSQL UTF8String];
-        
-        sqlite3_prepare_v2(groceryDB, updateItem, -1, &updateItemsStatement, NULL);
-        if (sqlite3_step(updateItemsStatement) != SQLITE_DONE)
+
+        const char *updateItemSQL = "update Item Set location_name = ?, venue_ids = ? Where name = ?";
+        if(sqlite3_prepare_v2(groceryDB, updateItemSQL, -1, &updateItemsStatement, NULL) != SQLITE_OK)
         {
-            NSString* fuck = @"";
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(groceryDB));
+            NSAssert1(0, @"Error while creating update statement. '%s'", sqlite3_errmsg(groceryDB));
         }
-        sqlite3_finalize(updateItemsStatement);
+    
+        sqlite3_bind_text(updateItemsStatement, 1, [locationName UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(updateItemsStatement, 2, [venueIds UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(updateItemsStatement, 3, [name UTF8String], -1, SQLITE_TRANSIENT);
+    
+        if(SQLITE_DONE != sqlite3_step(updateItemsStatement))
+        {
+            NSAssert1(0, @"Error while updating. '%s'", sqlite3_errmsg(groceryDB));
+        }
+    
+        sqlite3_reset(updateItemsStatement);
+        
     }
     sqlite3_close(groceryDB);
 }
