@@ -57,17 +57,20 @@ NSMutableArray* _newRecipes;
     [self.tableView reloadData];
 }
 
-//Actions
--(IBAction)backPressed:(id)sender
+-(void) viewWillDisappear:(BOOL)animated
 {
-    _rows = 0;
-    self.allRecipes = NULL;
-    [self returnLists];
-    if([delegate respondsToSelector:@selector(recipeSelected:)])
-    {
-        [delegate recipeSelected:self.recipesToAddToCurrent];
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        _rows = 0;
+        self.allRecipes = NULL;
+        [self returnLists];
+        if([delegate respondsToSelector:@selector(recipeSelected:)])
+        {
+            [delegate recipeSelected:self.recipesToAddToCurrent];
+        }
     }
-    [self dismissModalViewControllerAnimated:YES];
+    [super viewWillDisappear:animated];
 }
 
 -(IBAction)addPressed:(id)sender
