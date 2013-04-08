@@ -18,9 +18,29 @@
     {
         self.name = name;
         self.key = [name lowercaseString];
-        self.locationName = @"";
-        self.venueID = [[NSMutableArray alloc] initWithCapacity:0];
+        self.quantity = @"";
+        [self initLocation];
+        self.hashed = self.hash;
     }
     return (self);
+}
+-(id)initWithNameAndQuantity:(NSString*)name quantity:(NSString*)quantity
+{
+    self=[super init];
+    
+    if(self != nil)
+    {
+        self.name = name;
+        self.key = [name lowercaseString];
+        self.quantity = quantity;
+        [self initLocation];
+        self.hashed = self.hash;
+    }
+    return (self);
+}
+-(void)initLocation
+{
+    self.locationName = @"";
+    self.venueID = [[NSMutableArray alloc] initWithCapacity:0];
 }
 @end

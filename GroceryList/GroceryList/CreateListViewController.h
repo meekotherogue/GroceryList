@@ -16,6 +16,7 @@
 @interface CreateListViewController : UIViewController <UITextFieldDelegate>
 {
     IBOutlet UITextField* addItemText;
+    IBOutlet UITextField* addItemQuant;
     IBOutlet UIButton* addItemButton;
 }
 @property(nonatomic,assign)id delegate;

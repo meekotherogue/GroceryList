@@ -50,6 +50,11 @@
                 {
                     NSLog(@"Error: %s", errMsg);
                 }
+                char* createItemQuant = "CREATE TABLE IF NOT EXISTS Item_Quantity (id INTEGER PRIMARY KEY AUTOINCREMENT, item_name TEXT, list_name TEXT, quantity TEXT)";
+                if (sqlite3_exec(groceryDB, createItemQuant, NULL, NULL, &errMsg) != SQLITE_OK)
+                {
+                    NSLog(@"Error: %s", errMsg);
+                }
                 
                 sqlite3_close(groceryDB);
                 
@@ -66,7 +71,7 @@
     for(int i = 0; i<list.listOfItems.count; i++)
     {
         GroceryItem* item = list.listOfItems[i];
-        toReturn = [NSString stringWithFormat: @"%@%u", toReturn, item.hash];
+        toReturn = [NSString stringWithFormat: @"%@%u", toReturn, item.hashed];
         if(i != list.listOfItems.count-1)
         {
             toReturn = [NSString stringWithFormat: @"%@,", toReturn];
@@ -177,27 +182,49 @@
         return;
     }
     
+    NSMutableArray* itemsWithQuantities = [[NSMutableArray alloc] initWithCapacity:0];
     for(int i = 0; i < items.count; i++)
     {
         GroceryItem* item = items[i];
         NSString* name = item.name;
         NSString* locationName = item.locationName;
         NSString* venueIds = [self getVenueIDString:item.venueID];
-        NSUInteger* dum = item.hash;
-        NSString* itemId = [NSString stringWithFormat: @"%u",item.hash];
+        NSString* itemId = [NSString stringWithFormat: @"%u",item.hashed];
+        
         NSString* insertItemSQL =
             [NSString stringWithFormat: @"INSERT INTO Item (name, location_name, venue_ids, item_id) VALUES (\"%@\", \"%@\", \"%@\",\"%@\")", name, locationName,venueIds, itemId];
         
         const char* insertItem = [insertItemSQL UTF8String];
-        
         sqlite3_prepare_v2(groceryDB, insertItem, -1, &insertItemsStatement, NULL);
-        if (sqlite3_step(insertItemsStatement) == SQLITE_DONE)
+        if (sqlite3_step(insertItemsStatement) != SQLITE_DONE)
         {
+            NSLog(@"Inserting into Item failed.");
         }
         sqlite3_finalize(insertItemsStatement);
+        
+        if([item.quantity length] > 0)
+        {
+            NSString* quantity = item.quantity;
+            NSString* parent = item.list;
+            NSString* insertItemQuantSQL =
+            [NSString stringWithFormat: @"INSERT INTO Item_Quantity (item_name, list_name, quantity) VALUES (\"%@\", \"%@\", \"%@\")", name, parent, quantity];
+            const char* insertItemQuant = [insertItemQuantSQL UTF8String];
+            sqlite3_prepare_v2(groceryDB, insertItemQuant, -1, &insertItemsStatement, NULL);
+            if (sqlite3_step(insertItemsStatement) != SQLITE_DONE)
+            {
+                NSLog(@"Inserting into Item_Quantity failed.");
+            }
+            sqlite3_finalize(insertItemsStatement);
+        }
     }
     sqlite3_close(groceryDB);
 }
+
+-(void)saveItemQuantities:(NSMutableArray*)items
+{
+
+}
+
 -(NSMutableDictionary*)loadItems
 {
     const char* dbpath = [databasePath UTF8String];

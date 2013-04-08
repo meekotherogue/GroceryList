@@ -69,6 +69,7 @@ UITextField* _nameEntered;
     if (buttonIndex == 1)
     {
         _rows = 0;
+            
         [self dismissModalViewControllerAnimated:YES];
         if([delegate respondsToSelector:@selector(listCompleted:)])
         {
@@ -76,6 +77,11 @@ UITextField* _nameEntered;
             if(![_nameEntered.text isEqualToString:@""])
             {
                 arrayOfItems.name = _nameEntered.text;
+                for(int i = 0; i < arrayOfItems.listOfItems.count; i++)
+                {
+                    GroceryItem* item = arrayOfItems.listOfItems[i];
+                    item.list = _nameEntered.text;
+                }
             }
             [delegate listCompleted:arrayOfItems];
         }
@@ -88,6 +94,8 @@ UITextField* _nameEntered;
     {
         return;
     }
+    [self.view endEditing:TRUE];
+    addItemButton.enabled = FALSE;
     [self addItem];
 }
 //End Actions
@@ -101,7 +109,15 @@ UITextField* _nameEntered;
     }
     GroceryItem* item;
     NSString* itemText = addItemText.text;
-    item = [[GroceryItem alloc] initWithName:itemText];
+    NSString* itemQuant = addItemQuant.text;
+    if([itemQuant length] > 0)
+    {
+        item = [[GroceryItem alloc] initWithNameAndQuantity:itemText quantity:itemQuant];
+    }
+    else
+    {
+        item = [[GroceryItem alloc] initWithName:itemText];
+    }
     [arrayOfItems addItem:item];
     
     _rows++;
@@ -116,17 +132,26 @@ UITextField* _nameEntered;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
-    if([sender isEqual:addItemText])
+    if([sender isEqual:addItemText] || [sender isEqual:addItemQuant])
     {
         addItemButton.enabled = TRUE;
-        addItemText.text = @"";
+        if([sender isEqual:addItemText])
+        {
+            addItemText.text = @"";
+        }
+        else
+        {
+            addItemQuant.text = @"";
+        }
     }
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)sender
 {
-    if([sender isEqual:addItemText])
+    if([sender isEqual:addItemText] || [sender isEqual:addItemQuant])
     {
-        addItemButton.enabled = FALSE;
+        //if([ ])
+        //addItemButton.enabled = FALSE;
     }
 }
 

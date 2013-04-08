@@ -14,6 +14,10 @@
 @property NSMutableArray* venueID; //Array of id strings for venues this item has been checked in at.
 @property BOOL checked;
 @property NSString* key;
+@property NSString* quantity;
+@property NSString* list;
+@property unsigned int hashed;
 
 -(id)initWithName:(NSString*)name;
+-(id)initWithNameAndQuantity:(NSString*)name quantity:(NSString*)quantity;
 @end
