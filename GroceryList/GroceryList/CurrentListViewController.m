@@ -90,11 +90,11 @@
         [location setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
         location.text = item.locationName;
         [cell.contentView addSubview:location];*/
-        cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@",item.name,item.locationName];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@\n%@",item.quantity,item.name,item.locationName];
     }
     else
     {
-        cell.textLabel.text = item.name;
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",item.quantity,item.name];
     }
     
 

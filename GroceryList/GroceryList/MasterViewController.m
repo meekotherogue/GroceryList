@@ -118,8 +118,12 @@
         if(!existingItem)
         {
             [_allItems setObject:list.listOfItems[i] forKey:item.name];
-            [itemsToAdd addObject:item];
         }
+        else
+        {
+            item.hashed = existingItem.hashed;
+        }
+        [itemsToAdd addObject:item];
     }
     [self.databaseHelper saveItems:itemsToAdd];
 }
@@ -206,7 +210,7 @@
         curItem.venueID[0] = venue[@"id"];
         curItem.locationName = venue[@"name"];
     }
-    [self.databaseHelper updateItemsWithLocation:_currentList.listOfItems];
+    [self.databaseHelper updateItemsWithLocation:_currentList.listOfItems listName:_currentList.name];
 }
 
 #pragma mark - Table View

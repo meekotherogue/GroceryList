@@ -20,7 +20,7 @@
         self.key = [name lowercaseString];
         self.quantity = @"";
         [self initLocation];
-        self.hashed = self.hash;
+        self.hashed = [NSString stringWithFormat:@"%u",self.hash];
     }
     return (self);
 }
@@ -34,7 +34,7 @@
         self.key = [name lowercaseString];
         self.quantity = quantity;
         [self initLocation];
-        self.hashed = self.hash;
+        self.hashed = [NSString stringWithFormat:@"%u",self.hash];
     }
     return (self);
 }

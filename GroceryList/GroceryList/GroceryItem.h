@@ -16,7 +16,7 @@
 @property NSString* key;
 @property NSString* quantity;
 @property NSString* list;
-@property unsigned int hashed;
+@property NSString* hashed;
 
 -(id)initWithName:(NSString*)name;
 -(id)initWithNameAndQuantity:(NSString*)name quantity:(NSString*)quantity;
