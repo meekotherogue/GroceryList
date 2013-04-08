@@ -356,11 +356,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/AddRecipeViewController.m"
-         timestampString = "387081593.635239"
+         timestampString = "387082341.347474"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "145"
-         endingLineNumber = "145"
+         startingLineNumber = "155"
+         endingLineNumber = "155"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -369,11 +369,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/AddRecipeViewController.m"
-         timestampString = "387081593.635239"
+         timestampString = "387082341.347474"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -382,11 +382,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/AddRecipeViewController.m"
-         timestampString = "387081593.635239"
+         timestampString = "387082341.347474"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "141"
-         endingLineNumber = "141"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -395,11 +395,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/AddRecipeViewController.m"
-         timestampString = "387081593.635239"
+         timestampString = "387082341.347474"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
          landmarkName = "-numberOfSectionsInTableView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1336,7 +1336,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/DatabaseHelper.m"
@@ -1544,7 +1544,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/MasterViewController.m"

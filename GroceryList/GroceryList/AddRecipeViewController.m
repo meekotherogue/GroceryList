@@ -89,6 +89,8 @@ UITextField* _nameEntered;
     {
         return;
     }
+    [self.view endEditing:TRUE];
+    addItemButton.enabled = FALSE;
     [self addItem];
 }
 
@@ -102,6 +104,7 @@ UITextField* _nameEntered;
     GroceryItem* item;
     NSString* itemText = addItemText.text;
     item = [[GroceryItem alloc] initWithName:itemText];
+    item.quantity = addItemQuant.text;
     [arrayOfItems addItem:item];
     
     _rows++;
@@ -116,17 +119,24 @@ UITextField* _nameEntered;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
-    if([sender isEqual:addItemText])
+    if([sender isEqual:addItemText] || [sender isEqual:addItemQuant])
     {
         addItemButton.enabled = TRUE;
-        addItemText.text = @"";
+        if([sender isEqual:addItemText])
+        {
+            addItemText.text = @"";
+        }
+        else
+        {
+            addItemQuant.text = @"";
+        }
     }
 }
 -(void)textFieldDidEndEditing:(UITextField *)sender
 {
     if([sender isEqual:addItemText])
     {
-        addItemButton.enabled = FALSE;
+        //addItemButton.enabled = FALSE;
     }
 }
 

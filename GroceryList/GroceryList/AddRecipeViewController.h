@@ -17,6 +17,7 @@
 {
     IBOutlet UITextField* addItemText;
     IBOutlet UIButton* addItemButton;
+    IBOutlet UITextField* addItemQuant;
 }
 @property(nonatomic,assign)id delegate;
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
