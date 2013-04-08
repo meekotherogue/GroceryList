@@ -50,6 +50,7 @@
 		5BDA90B4171277DF0001BDE3 /* ShowItemLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA90B2171277DB0001BDE3 /* ShowItemLocationViewController.m */; };
 		5BDA90B5171277DF0001BDE3 /* ShowItemLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BDA90B3171277DD0001BDE3 /* ShowItemLocationViewController.xib */; };
 		5BDA90B717127AD40001BDE3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA90B617127AD40001BDE3 /* MapKit.framework */; };
+		5BDA90BA1712861D0001BDE3 /* ItemMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA90B91712861D0001BDE3 /* ItemMapAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,8 @@
 		5BDA90B2171277DB0001BDE3 /* ShowItemLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowItemLocationViewController.m; sourceTree = "<group>"; };
 		5BDA90B3171277DD0001BDE3 /* ShowItemLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowItemLocationViewController.xib; sourceTree = "<group>"; };
 		5BDA90B617127AD40001BDE3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5BDA90B81712861D0001BDE3 /* ItemMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemMapAnnotation.h; sourceTree = "<group>"; };
+		5BDA90B91712861D0001BDE3 /* ItemMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemMapAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +215,8 @@
 				5BA81F3E16F6D4960020A4DC /* GroceryList.m */,
 				5BDA905A1706A7380001BDE3 /* DatabaseHelper.h */,
 				5BDA905B1706A7380001BDE3 /* DatabaseHelper.m */,
+				5BDA90B81712861D0001BDE3 /* ItemMapAnnotation.h */,
+				5BDA90B91712861D0001BDE3 /* ItemMapAnnotation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -369,6 +374,7 @@
 				5BDA90911709427F0001BDE3 /* BZFoursquareRequest.m in Sources */,
 				5BDA90AC170BC72A0001BDE3 /* CheckInViewController.m in Sources */,
 				5BDA90B4171277DF0001BDE3 /* ShowItemLocationViewController.m in Sources */,
+				5BDA90BA1712861D0001BDE3 /* ItemMapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

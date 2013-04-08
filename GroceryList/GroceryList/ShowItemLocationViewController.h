@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet MKMapView* mapView;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
--(void)setLocation:(double)latitude longitude:(double)longitude;
+@property (nonatomic) NSString* name;
+@property (nonatomic) NSString* address;
+-(void)setLocation:(double)latitude longitude:(double)longitude name:(NSString*)name address:(NSString*)address;
 @end
 

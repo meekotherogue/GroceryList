@@ -204,9 +204,9 @@
     {
         GroceryItem* curItem = _currentList.listOfItems[i];
         GroceryItem* itemToUpdate = _allItems[curItem.key];
-        itemToUpdate.venueID = venue[@"id"];
+        itemToUpdate.venueID = [NSString stringWithFormat:@"%@,%@",venue[@"location"][@"lat"],venue[@"location"][@"lng"]];//venue[@"id"];
         itemToUpdate.locationName = venue[@"name"];
-        curItem.venueID = venue[@"id"];
+        curItem.venueID = itemToUpdate.venueID;//venue[@"id"];
         curItem.locationName = venue[@"name"];
     }
     [self.databaseHelper updateItemsWithLocation:_currentList.listOfItems listName:_currentList.name];

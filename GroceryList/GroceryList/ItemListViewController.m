@@ -90,10 +90,21 @@
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
 //    UITableViewCell *swipedCell  = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
     GroceryItem* cell = allItemsArray[swipedIndexPath.row];
+    NSArray* coords = [cell.venueID componentsSeparatedByString: @","];
+    double lat = [coords[0] doubleValue];
+    double lng = [coords[1] doubleValue];
+    
+    NSArray* titles = [cell.locationName componentsSeparatedByString: @" - "];
+    NSString* name = titles[0];
+    NSString* address = @"";
+    if(titles.count > 1)
+    {
+        address = titles[1];
+    }
     
     ShowItemLocationViewController* showItemListViewController = [ShowItemLocationViewController alloc];
     showItemListViewController = [[ShowItemLocationViewController alloc] initWithNibName:@"ShowItemLocationViewController" bundle:nil];
-    [showItemListViewController setLocation:-76.580806 longitude:80.580806];
+    [showItemListViewController setLocation:lat longitude:lng name:name address:address];
     showItemListViewController.delegate = self;
      
     [ self.navigationController pushViewController:showItemListViewController animated:YES ];

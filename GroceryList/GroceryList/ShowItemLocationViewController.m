@@ -7,6 +7,7 @@
 //
 
 #import "ShowItemLocationViewController.h"
+#import "ItemMapAnnotation.h"
 
 @interface ShowItemLocationViewController ()
 
@@ -37,12 +38,17 @@
     zoomLocation.longitude= self.longitude;
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
+
+    ItemMapAnnotation *annotation = [[ItemMapAnnotation alloc] initWithName:self.name address:self.address coordinate:zoomLocation] ;
+    [_mapView addAnnotation:annotation];
     [self.mapView setRegion:adjustedRegion animated:YES];
 }
--(void)setLocation:(double)latitude longitude:(double)longitude
+-(void)setLocation:(double)latitude longitude:(double)longitude name:(NSString*)name address:(NSString*)address
 {
     self.latitude = latitude;
     self.longitude = longitude;
+    self.name = name;
+    self.address = address;
 }
 
 - (void)didReceiveMemoryWarning
