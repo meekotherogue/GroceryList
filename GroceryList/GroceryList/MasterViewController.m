@@ -107,7 +107,7 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(void)addItemsFromList:(GroceryList*)list
+-(GroceryList*)addItemsFromList:(GroceryList*)list
 {
     NSMutableArray* itemsToAdd = [[NSMutableArray alloc] initWithCapacity:0];
     for(int i = 0; i < list.listOfItems.count; i++)
@@ -121,11 +121,12 @@
         }
         else
         {
-            item.hashed = existingItem.hashed;
+            //item.hashed = existingItem.hashed;
         }
         [itemsToAdd addObject:item];
     }
     [self.databaseHelper saveItems:itemsToAdd];
+    return list;
 }
 
 //Delegates
@@ -136,10 +137,8 @@
     [_allLists addObject:list];
     
     NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
-    [listArray addObject:list];
+    [listArray addObject:[self addItemsFromList:list]];
     [self.databaseHelper saveLists:listArray whichToSave:@"List"];
-    
-    [self addItemsFromList:list];
 }
 //ListSelected delegate
 -(void)listsSelected:(NSMutableArray*)lists

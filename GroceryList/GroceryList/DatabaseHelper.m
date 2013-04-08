@@ -72,8 +72,23 @@
     for(int i = 0; i<list.listOfItems.count; i++)
     {
         GroceryItem* item = list.listOfItems[i];
-        toReturn = [NSString stringWithFormat: @"%@%@", toReturn, item.hashed];
+        toReturn = [NSString stringWithFormat: @"%@%@", toReturn, item.key];
         if(i != list.listOfItems.count-1)
+        {
+            toReturn = [NSString stringWithFormat: @"%@,", toReturn];
+        }
+    }
+    return toReturn;
+}
+
+-(NSString*)formatIds:(NSString*)ids
+{
+    NSArray* stringArray = [ids componentsSeparatedByString: @","];
+    NSString* toReturn = @"";
+    for(int i = 0; i < stringArray.count; i++)
+    {
+        toReturn = [NSString stringWithFormat: @"%@\"%@\"", toReturn, stringArray[i]];
+        if(i != stringArray.count-1)
         {
             toReturn = [NSString stringWithFormat: @"%@,", toReturn];
         }
@@ -128,6 +143,7 @@
         NSString* name = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadListStatment, 0)];
         NSString* dateCreated = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadListStatment, 1)];
         NSString* itemIds = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadListStatment, 2)];
+        itemIds = [self formatIds: itemIds];
         
         GroceryList* list = [[GroceryList alloc] initWithName:name];
         list.dateCreated = dateCreated;
@@ -189,7 +205,7 @@
         GroceryItem* item = items[i];
         NSString* name = item.name;
         NSString* locationName = item.locationName;
-        NSString* itemId = item.hashed;
+        NSString* itemId = item.key;
         
         NSString* insertItemSQL =
             [NSString stringWithFormat: @"INSERT INTO Item (name, item_id) VALUES (\"%@\", \"%@\")", name, itemId];
@@ -292,6 +308,7 @@
     if (sqlite3_prepare_v2(groceryDB, loadItemQuery, -1, &loadItemStatment, NULL) != SQLITE_OK)
     {
         sqlite3_close(groceryDB);
+        NSLog(@"%s", sqlite3_errmsg(groceryDB));
         return NULL;
     }
     while (sqlite3_step(loadItemStatment) == SQLITE_ROW)

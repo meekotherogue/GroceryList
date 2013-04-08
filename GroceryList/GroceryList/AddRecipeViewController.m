@@ -72,6 +72,11 @@ UITextField* _nameEntered;
             if(![_nameEntered.text isEqualToString:@""])
             {
                 arrayOfItems.name = _nameEntered.text;
+                for(int i = 0; i < arrayOfItems.listOfItems.count; i++)
+                {
+                    GroceryItem* item = arrayOfItems.listOfItems[i];
+                    item.list = _nameEntered.text;
+                }
             }
             [delegate recipeCreated:arrayOfItems];
         }
