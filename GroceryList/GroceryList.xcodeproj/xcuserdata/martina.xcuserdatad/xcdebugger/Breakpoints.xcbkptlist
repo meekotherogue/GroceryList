@@ -1613,11 +1613,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GroceryList/ShowItemLocationViewController.m"
-         timestampString = "387090453.364328"
+         timestampString = "387091256.728388"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "48"
-         endingLineNumber = "48"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
          landmarkName = "-setLocation:longitude:name:address:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1632,6 +1632,19 @@
          startingLineNumber = "93"
          endingLineNumber = "93"
          landmarkName = "-cellSwipe:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "GroceryList/ItemMapAnnotation.m"
+         timestampString = "387091256.728388"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "16"
+         endingLineNumber = "16"
+         landmarkName = "-initWithName:address:coordinate:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

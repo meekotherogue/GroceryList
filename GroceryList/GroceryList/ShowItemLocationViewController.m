@@ -39,6 +39,11 @@
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];
 
+    for (id<MKAnnotation> annotation in self.mapView.annotations)
+    {
+        [self.mapView removeAnnotation:annotation];
+    }
+    
     ItemMapAnnotation *annotation = [[ItemMapAnnotation alloc] initWithName:self.name address:self.address coordinate:zoomLocation] ;
     [_mapView addAnnotation:annotation];
     [self.mapView setRegion:adjustedRegion animated:YES];

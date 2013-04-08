@@ -10,13 +10,14 @@
 
 @implementation ItemMapAnnotation
 
+@synthesize coordinate = _coordinate;
 - (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate
 {
     if ((self = [super init]))
     {
         self.name = [name copy];
         self.address = [address copy];
-        self.coordinate = coordinate;
+        _coordinate = coordinate;
     }
     return self;
 }
