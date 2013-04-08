@@ -204,9 +204,9 @@
     {
         GroceryItem* curItem = _currentList.listOfItems[i];
         GroceryItem* itemToUpdate = _allItems[curItem.key];
-        itemToUpdate.venueID[0] = venue[@"id"];
+        itemToUpdate.venueID = venue[@"id"];
         itemToUpdate.locationName = venue[@"name"];
-        curItem.venueID[0] = venue[@"id"];
+        curItem.venueID = venue[@"id"];
         curItem.locationName = venue[@"name"];
     }
     [self.databaseHelper updateItemsWithLocation:_currentList.listOfItems listName:_currentList.name];

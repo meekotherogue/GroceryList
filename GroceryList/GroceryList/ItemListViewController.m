@@ -7,6 +7,7 @@
 //
 
 #import "ItemListViewController.h"
+#import "ShowItemLocationViewController.h"
 
 @interface ItemListViewController ()
 {
@@ -38,12 +39,9 @@
     self.title = @"All Items";
     itemsSelected = [[NSMutableArray alloc] initWithCapacity:0];
     
-    /*allItemsArray = [self.allItems keysSortedByValueUsingComparator:^NSComparisonResult(id obj1, id obj2)
-                                   {
-                                       GroceryItem* item1 = obj1;
-                                       GroceryItem* item2 = obj2;
-                                       return [item2.name compare:item1.name];
-                                   }];*/
+    UISwipeGestureRecognizer *showExtrasSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipe:)];
+    showExtrasSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:showExtrasSwipe];
     
     allItemsArray = [self.allItems allValues];
 }
@@ -85,6 +83,21 @@
 }
 
 //End Actions
+
+-(void)cellSwipe:(UISwipeGestureRecognizer *)gesture
+{
+    CGPoint location = [gesture locationInView:self.tableView];
+    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+//    UITableViewCell *swipedCell  = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    GroceryItem* cell = allItemsArray[swipedIndexPath.row];
+    
+    ShowItemLocationViewController* showItemListViewController = [ShowItemLocationViewController alloc];
+    showItemListViewController = [[ShowItemLocationViewController alloc] initWithNibName:@"ShowItemLocationViewController" bundle:nil];
+    [showItemListViewController setLocation:-76.580806 longitude:80.580806];
+    showItemListViewController.delegate = self;
+     
+    [ self.navigationController pushViewController:showItemListViewController animated:YES ];
+}
 
 //Table methods
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section

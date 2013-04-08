@@ -8,6 +8,9 @@
 
 #import "CheckInViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#endif
 
 
 @interface CheckInViewController ()
@@ -20,7 +23,6 @@
     @property(nonatomic) double latitude;
     @property(nonatomic) double longitude;
     @property(nonatomic, strong) NSMutableDictionary* venueSelected;
-    - (void)updateView;
     - (void)cancelRequest;
     - (void)prepareForRequest;
     - (void)checkin;
@@ -91,7 +93,6 @@ NSMutableArray* _venues;
     self.notifications = request.notifications;
     self.response = request.response;
     self.request = nil;
-    [self updateView];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     if(self.response[@"venues"] != NULL)
@@ -126,7 +127,6 @@ NSMutableArray* _venues;
     self.notifications = request.notifications;
     self.response = request.response;
     self.request = nil;
-    [self updateView];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
@@ -137,7 +137,6 @@ NSMutableArray* _venues;
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:coords, @"ll", nil];
     self.request = [foursquare_ requestWithPath:@"venues/search" HTTPMethod:@"GET" parameters:parameters delegate:self];
     [request_ start];
-    [self updateView];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
@@ -157,21 +156,6 @@ NSMutableArray* _venues;
     self.response = nil;
 }
 
-- (void)updateView
-{
-    if ([self isViewLoaded])
-    {
-
-        /*
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [self.tableView reloadData];
-        if (indexPath) {
-            [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        }*/
-        //Do shit here
-    }
-}
-
 - (void)cancelRequest
 {
     if (request_)
@@ -181,12 +165,6 @@ NSMutableArray* _venues;
         self.request = nil;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
-}
-
-- (void)foursquareDidAuthorize:(BZFoursquare *)foursquare
-{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:kAccessTokenRow inSection:kAuthenticationSection];
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
 }
 
 //Table methods
@@ -219,7 +197,15 @@ NSMutableArray* _venues;
     if(_venues.count > 0)
     {
         NSMutableDictionary* venue = _venues[indexPath.row];
-        cell.textLabel.text = venue[@"name"];
+        NSString* address = venue[@"location"][@"address"];
+        if([address length] > 0)
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",venue[@"name"], address];
+        }
+        else
+        {
+            cell.textLabel.text = venue[@"name"];
+        }
     }
     return cell;
 }
@@ -236,14 +222,19 @@ NSMutableArray* _venues;
 -(void) locationManager: (CLLocationManager *)manager didUpdateToLocation: (CLLocation *) newLocation
            fromLocation: (CLLocation *) oldLocation
 {
-    CLLocation *location = [self.locationManager location];
-    // Configure the new event with information from the location
-    CLLocationCoordinate2D coordinate = [location coordinate];
-
-    //self.latitude = coordinate.latitude;
-    //self.longitude = coordinate.longitude;
-    self.latitude = 52.115925;
-    self.longitude = -106.633753;
+    if (!TARGET_IPHONE_SIMULATOR)
+    {
+        CLLocation *location = [self.locationManager location];
+        CLLocationCoordinate2D coordinate = [location coordinate];
+        
+        self.latitude = coordinate.latitude;
+        self.longitude = coordinate.longitude;
+    }
+    else
+    {
+        self.latitude = 52.115925;
+        self.longitude = -106.633753;
+    }
 }
 
 - (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

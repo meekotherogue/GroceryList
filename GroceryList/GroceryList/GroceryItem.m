@@ -41,6 +41,5 @@
 -(void)initLocation
 {
     self.locationName = @"";
-    self.venueID = [[NSMutableArray alloc] initWithCapacity:0];
 }
 @end

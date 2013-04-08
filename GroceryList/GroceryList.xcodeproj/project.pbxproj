@@ -47,6 +47,9 @@
 		5BDA90AC170BC72A0001BDE3 /* CheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA90AA170BC7290001BDE3 /* CheckInViewController.m */; };
 		5BDA90AD170BC72A0001BDE3 /* CheckInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BDA90AB170BC7290001BDE3 /* CheckInViewController.xib */; };
 		5BDA90B0170BEC150001BDE3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA90AF170BEC150001BDE3 /* CoreLocation.framework */; };
+		5BDA90B4171277DF0001BDE3 /* ShowItemLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA90B2171277DB0001BDE3 /* ShowItemLocationViewController.m */; };
+		5BDA90B5171277DF0001BDE3 /* ShowItemLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BDA90B3171277DD0001BDE3 /* ShowItemLocationViewController.xib */; };
+		5BDA90B717127AD40001BDE3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA90B617127AD40001BDE3 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +113,10 @@
 		5BDA90AA170BC7290001BDE3 /* CheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckInViewController.m; sourceTree = "<group>"; };
 		5BDA90AB170BC7290001BDE3 /* CheckInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckInViewController.xib; sourceTree = "<group>"; };
 		5BDA90AF170BEC150001BDE3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5BDA90B1171277DA0001BDE3 /* ShowItemLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowItemLocationViewController.h; sourceTree = "<group>"; };
+		5BDA90B2171277DB0001BDE3 /* ShowItemLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowItemLocationViewController.m; sourceTree = "<group>"; };
+		5BDA90B3171277DD0001BDE3 /* ShowItemLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowItemLocationViewController.xib; sourceTree = "<group>"; };
+		5BDA90B617127AD40001BDE3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BDA90B717127AD40001BDE3 /* MapKit.framework in Frameworks */,
 				5BDA90B0170BEC150001BDE3 /* CoreLocation.framework in Frameworks */,
 				5BDA9094170942EE0001BDE3 /* MobileCoreServices.framework in Frameworks */,
 				5BDA90671706B3D50001BDE3 /* libsqlite3.dylib in Frameworks */,
@@ -132,6 +140,7 @@
 		5B87A7F916E2CAAC003D7E6B = {
 			isa = PBXGroup;
 			children = (
+				5BDA90B617127AD40001BDE3 /* MapKit.framework */,
 				5BDA90AF170BEC150001BDE3 /* CoreLocation.framework */,
 				5BDA9093170942EE0001BDE3 /* MobileCoreServices.framework */,
 				5BDA908B1709427F0001BDE3 /* BZFoursquare */,
@@ -236,6 +245,9 @@
 				5BDA90A9170BC7290001BDE3 /* CheckInViewController.h */,
 				5BDA90AA170BC7290001BDE3 /* CheckInViewController.m */,
 				5BDA90AB170BC7290001BDE3 /* CheckInViewController.xib */,
+				5BDA90B1171277DA0001BDE3 /* ShowItemLocationViewController.h */,
+				5BDA90B2171277DB0001BDE3 /* ShowItemLocationViewController.m */,
+				5BDA90B3171277DD0001BDE3 /* ShowItemLocationViewController.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -327,6 +339,7 @@
 				5BAA8CF01700081D002F4613 /* ItemListViewController.xib in Resources */,
 				5BDA90A6170BB87F0001BDE3 /* background.png in Resources */,
 				5BDA90AD170BC72A0001BDE3 /* CheckInViewController.xib in Resources */,
+				5BDA90B5171277DF0001BDE3 /* ShowItemLocationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +368,7 @@
 				5BDA90901709427F0001BDE3 /* BZFoursquare.m in Sources */,
 				5BDA90911709427F0001BDE3 /* BZFoursquareRequest.m in Sources */,
 				5BDA90AC170BC72A0001BDE3 /* CheckInViewController.m in Sources */,
+				5BDA90B4171277DF0001BDE3 /* ShowItemLocationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

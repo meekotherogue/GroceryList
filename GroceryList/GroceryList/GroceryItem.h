@@ -11,7 +11,7 @@
 @interface GroceryItem : NSObject
 @property NSString* name;
 @property NSString* locationName; //Human readable string of the latest checkin place
-@property NSMutableArray* venueID; //Array of id strings for venues this item has been checked in at.
+@property NSString* venueID; //Array of id strings for venues this item has been checked in at.
 @property BOOL checked;
 @property NSString* key;
 @property NSString* quantity;
