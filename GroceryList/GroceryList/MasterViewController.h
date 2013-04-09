@@ -21,10 +21,6 @@
 
 @interface MasterViewController : UITableViewController<BZFoursquareRequestDelegate, BZFoursquareSessionDelegate> {
     BZFoursquare* foursquare_;
-/*    BZFoursquareRequest *request_;
-    NSDictionary        *meta_;
-    NSArray             *notifications_;
-    NSDictionary        *response_;*/
 }
 
 @property(nonatomic,readonly,strong) BZFoursquare *foursquare;

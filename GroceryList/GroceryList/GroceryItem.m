@@ -20,7 +20,6 @@
         self.key = [name lowercaseString];
         self.quantity = @"";
         [self initLocation];
-        self.hashed = [NSString stringWithFormat:@"%u",self.hash];
     }
     return (self);
 }
@@ -34,12 +33,23 @@
         self.key = [name lowercaseString];
         self.quantity = quantity;
         [self initLocation];
-        self.hashed = [NSString stringWithFormat:@"%u",self.hash];
     }
     return (self);
 }
 -(void)initLocation
 {
     self.locationName = @"";
+    self.venueID = @"";
+}
+-(id)copyWithZone:(NSZone *)zone
+{
+    GroceryItem* anotherItem = [[GroceryItem alloc] init];
+    anotherItem.name = [self.name copyWithZone: zone];
+    anotherItem.locationName = [self.locationName copyWithZone: zone];
+    anotherItem.venueID = [self.venueID copyWithZone: zone];
+    anotherItem.key = [self.key copyWithZone: zone];
+    anotherItem.quantity = [self.quantity copyWithZone: zone];
+    anotherItem.list = [self.list copyWithZone: zone];
+    return anotherItem;
 }
 @end

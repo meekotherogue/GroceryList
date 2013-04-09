@@ -21,5 +21,7 @@
 -(void)saveItems:(NSMutableArray*)items;
 -(NSMutableDictionary*)loadItems;
 -(void)updateItemsWithLocation:(NSMutableArray*)items listName:(NSString*)listName;
+-(void)updateList:(GroceryList*)list items:(NSMutableArray*)itemsToUpdate
+;
 
 @end

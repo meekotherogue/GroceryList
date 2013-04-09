@@ -35,6 +35,7 @@
 }
 -(void)addItem:(GroceryItem *)item
 {
+    item.list = self.name;
     [self.listOfItems addObject:item];
 }
 -(NSString*)getDate
@@ -42,5 +43,21 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     return [dateFormatter stringFromDate:[NSDate date]];
+}
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    GroceryList* another = [[GroceryList alloc] init];
+    another.name = [self.name copyWithZone: zone];
+    another.dateCreated = [self.dateCreated copyWithZone: zone];
+    
+    another.listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+    for(int i = 0; i < self.listOfItems.count; i++)
+    {
+        GroceryItem* item = self.listOfItems[i];
+        [another addItem:item];
+    }
+    
+    return another;
 }
 @end
