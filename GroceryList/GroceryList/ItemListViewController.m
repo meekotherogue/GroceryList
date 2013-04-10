@@ -110,23 +110,24 @@
 {
     static NSString* cellID = @"Cell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    
-    if(cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
-    }
+
     GroceryItem* item = allItemsArray[indexPath.row];
     
     if([item.locationName length] != 0)
     {
-        cell.textLabel.numberOfLines = 3;
-        cell.textLabel.font = [UIFont systemFontOfSize:14.0];
-        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-        
-        cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@",item.name,item.locationName];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+        }
+        cell.textLabel.text=[NSString stringWithFormat:@"%@ %@",item.quantity,item.name];
+        cell.detailTextLabel.text = item.locationName;
     }
     else
     {
+        if(cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
+        }
         cell.textLabel.text = item.name;
     }
     

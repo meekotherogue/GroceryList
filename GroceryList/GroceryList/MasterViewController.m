@@ -110,6 +110,7 @@
     _currentList = list;
     [_allLists addObject:list];
     
+    self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
     NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
     [listArray addObject:[self addItemsFromList:list]];
     [self.databaseHelper saveLists:listArray whichToSave:@"List"];
@@ -355,8 +356,10 @@
             [alert show];
             return;
         }
-        
-        self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
+        if(self.currentListViewController == NULL)
+        {
+            self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
+        }
         self.currentListViewController.delegate = self;
         [self.currentListViewController setList:_currentList];
 
