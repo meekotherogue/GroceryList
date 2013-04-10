@@ -173,6 +173,10 @@
 -(void)addItems:(NSMutableArray*)items
 {
     bool newList = false;
+    if(items.count == 0)
+    {
+        return;
+    }
     if(_currentList == nil)
     {
         newList = true;

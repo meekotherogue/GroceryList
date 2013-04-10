@@ -29,9 +29,9 @@
     
     self.title = self.currentList.name;
 
-    UISwipeGestureRecognizer *showExtrasSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipe:)];
-    showExtrasSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.tableView addGestureRecognizer:showExtrasSwipe];
+    UISwipeGestureRecognizer *showLocationSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipe:)];
+    showLocationSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:showLocationSwipe];
 }
 
 - (void)didReceiveMemoryWarning

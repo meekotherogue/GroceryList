@@ -18,4 +18,5 @@
 -(id)initWithName:(NSString*)name;
 
 -(void)addItem:(GroceryItem*)item;
+-(void)removeItem:(int)index;
 @end

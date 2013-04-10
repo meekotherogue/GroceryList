@@ -38,6 +38,10 @@
     item.list = self.name;
     [self.listOfItems addObject:item];
 }
+-(void)removeItem:(int)index
+{
+    [self.listOfItems removeObjectAtIndex:index];
+}
 -(NSString*)getDate
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
