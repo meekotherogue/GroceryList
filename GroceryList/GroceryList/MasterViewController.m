@@ -143,23 +143,12 @@
     //If the Current list is new, add it to the list array to persist it.
     if(newList)
     {
-        GroceryList* newGroceryList = [_currentList copy];
-        [_allLists addObject:newGroceryList];
-        NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
-        [listArray addObject:[self addItemsFromList:newGroceryList]];
-        [self.databaseHelper saveLists:listArray whichToSave:@"List"];
+        [self saveNewListFromCurrent];
     }
     else
     {
         //Update the List itself
-        GroceryList* updateList = [self findListByName:_currentList.name];
-        
-        for (GroceryItem* item in itemsToAdd)
-        {
-            [updateList addItem:[item copy]];
-        }
-        
-        [self.databaseHelper updateList:[_currentList copy] items:itemsToAdd];
+        [self saveNewItemsToExistingList:itemsToAdd];
     }
 }
 //RecipesSelected delegate
@@ -183,12 +172,32 @@
 //Add Items for list delegate
 -(void)addItems:(NSMutableArray*)items
 {
+    bool newList = false;
+    if(_currentList == nil)
+    {
+        newList = true;
+        _currentList = [[GroceryList alloc] init];
+    }
     for(int i = 0; i < items.count; i++)
     {
         GroceryItem* item = items[i];
         [_currentList addItem:item];
     }
+    if(newList)
+    {
+        [self saveNewListFromCurrent];
+    }
+    else
+    {
+        [self saveNewItemsToExistingList:items];
+    }
 }
+//Add items from other lists delegate
+-(void)itemsSelectedFromLists:(NSMutableArray*)items
+{
+    [self addItems:items];
+}
+
 //Foursquare checkin is complete.
 -(void)checkInCompleted:(NSMutableDictionary*)venue
 {
@@ -206,6 +215,8 @@
     [self.databaseHelper updateItemsWithLocation:_currentList.listOfItems listName:_currentList.name];
 }
 
+//Helper methods
+//Get a list given it's name
 -(GroceryList*)findListByName:(NSString*)name
 {
     GroceryList* foundList;
@@ -219,7 +230,7 @@
     }
     return foundList;
 }
-
+//Get an item given its name
 -(GroceryItem*)findItemInListByName:(NSMutableArray*)list name:(NSString*)name
 {
     GroceryItem* foundItem;
@@ -232,6 +243,25 @@
         }
     }
     return foundItem;
+}
+//Save the Current List if creating it from another list, recipe, or items
+-(void)saveNewListFromCurrent
+{
+    GroceryList* newGroceryList = [_currentList copy];
+    [_allLists addObject:newGroceryList];
+    NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
+    [listArray addObject:[self addItemsFromList:newGroceryList]];
+    [self.databaseHelper saveLists:listArray whichToSave:@"List"];
+}
+//Save items that were added from other lists to the existing current list.
+-(void)saveNewItemsToExistingList:(NSMutableArray*)itemsToAdd
+{
+    GroceryList* updateList = [self findListByName:_currentList.name];
+    for (GroceryItem* item in itemsToAdd)
+    {
+        [updateList addItem:[item copy]];
+    }
+    [self.databaseHelper updateList:[_currentList copy] items:itemsToAdd];
 }
 
 #pragma mark - Table View

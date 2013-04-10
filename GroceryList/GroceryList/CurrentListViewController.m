@@ -7,6 +7,7 @@
 //
 
 #import "CurrentListViewController.h"
+#import "ShowItemLocationViewController.h"
 
 @interface CurrentListViewController ()
 
@@ -28,11 +29,9 @@
     
     self.title = self.currentList.name;
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UISwipeGestureRecognizer *showExtrasSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipe:)];
+    showExtrasSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:showExtrasSwipe];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,9 +96,33 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",item.quantity,item.name];
     }
     
-
-    
     return cell;
+}
+
+-(void)cellSwipe:(UISwipeGestureRecognizer *)gesture
+{
+    CGPoint location = [gesture locationInView:self.tableView];
+    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    
+    GroceryItem* cell = self.currentList.listOfItems[swipedIndexPath.row];
+    NSArray* coords = [cell.venueID componentsSeparatedByString: @","];
+    double lat = [coords[0] doubleValue];
+    double lng = [coords[1] doubleValue];
+    
+    NSArray* titles = [cell.locationName componentsSeparatedByString: @" - "];
+    NSString* name = titles[0];
+    NSString* address = @"";
+    if(titles.count > 1)
+    {
+        address = titles[1];
+    }
+    
+    ShowItemLocationViewController* showItemListViewController = [ShowItemLocationViewController alloc];
+    showItemListViewController = [[ShowItemLocationViewController alloc] initWithNibName:@"ShowItemLocationViewController" bundle:nil];
+    [showItemListViewController setLocation:lat longitude:lng name:name address:address];
+    showItemListViewController.delegate = self;
+    
+    [ self.navigationController pushViewController:showItemListViewController animated:YES ];
 }
 
 /*

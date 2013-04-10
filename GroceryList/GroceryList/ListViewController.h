@@ -10,6 +10,7 @@
 @protocol AddListDelegate
 @required
 -(void)addList:(GroceryList*)list;
+-(void)addItems:(NSMutableArray*)items;
 @end
 @interface ListViewController : CurrentListViewController
 

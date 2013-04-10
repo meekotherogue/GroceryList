@@ -9,7 +9,9 @@
 #import "ListViewController.h"
 
 @interface ListViewController ()
-
+{
+    NSMutableArray* itemsSelected;
+}
 @end
 
 @implementation ListViewController
@@ -30,7 +32,23 @@
 	// Do any additional setup after loading the view.
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addList)];
     self.navigationItem.rightBarButtonItem = addButton;
+    itemsSelected = [[NSMutableArray alloc] initWithCapacity:0];
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+    }
     
+    self.currentList = NULL;
+    if([delegate respondsToSelector:@selector(addItems:)])
+    {
+        [delegate addItems:itemsSelected];
+    }
+    itemsSelected = NULL;
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,6 +77,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    GroceryItem* item = self.currentList.listOfItems[indexPath.row];
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell.accessoryType == UITableViewCellAccessoryCheckmark)
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [itemsSelected removeObject:item];
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [itemsSelected addObject:item];
+    }
 }
 
 @end

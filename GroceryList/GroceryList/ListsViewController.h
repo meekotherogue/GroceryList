@@ -10,6 +10,7 @@
 @protocol ListSelectedDelegate
 @required
 -(void)listsSelected:(NSMutableArray*)lists;
+-(void)itemsSelectedFromLists:(NSMutableArray*)items;
 @end
 
 @interface ListsViewController : UIViewController
@@ -18,4 +19,5 @@
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
 @property(nonatomic, strong)NSMutableArray* allLists;
 @property(nonatomic, strong)NSMutableArray* listsToAddToCurrent;
+@property(nonatomic, strong)NSMutableArray* itemsToAddToCurrent;
 @end

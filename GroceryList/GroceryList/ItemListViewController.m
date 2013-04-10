@@ -52,22 +52,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-//Actions
--(IBAction)backPressed:(id)sender
+-(void) viewWillDisappear:(BOOL)animated
 {
-    _rows = 0;
-    self.allItems = NULL;
-    [self dismissModalViewControllerAnimated:YES];
-    //Delegate to send items back
-    [self dismissModalViewControllerAnimated:YES];
-    if([delegate respondsToSelector:@selector(addItems:)])
-    {
-        [delegate addItems:itemsSelected];
-    }
-    itemsSelected = NULL;
-}
-
--(void) viewWillDisappear:(BOOL)animated {
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
@@ -88,7 +74,7 @@
 {
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
-//    UITableViewCell *swipedCell  = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
+
     GroceryItem* cell = allItemsArray[swipedIndexPath.row];
     NSArray* coords = [cell.venueID componentsSeparatedByString: @","];
     double lat = [coords[0] doubleValue];
@@ -146,6 +132,17 @@
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
     GroceryItem* item = allItemsArray[indexPath.row];
-    [itemsSelected addObject:item];
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell.accessoryType == UITableViewCellAccessoryCheckmark)
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [itemsSelected removeObject:item];
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [itemsSelected addObject:item];
+    }
 }
 @end

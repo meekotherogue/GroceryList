@@ -33,6 +33,7 @@ NSIndexPath* _currentSelection;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.listsToAddToCurrent = [[NSMutableArray alloc] initWithCapacity:0];
+    self.itemsToAddToCurrent = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,6 +46,10 @@ NSIndexPath* _currentSelection;
 {
     [self.listsToAddToCurrent addObject:list];
 }
+-(void)addItems:(NSMutableArray*)items
+{
+    [self.itemsToAddToCurrent addObjectsFromArray:items];
+}
 
 -(void) viewWillDisappear:(BOOL)animated
 {
@@ -54,6 +59,10 @@ NSIndexPath* _currentSelection;
         if([delegate respondsToSelector:@selector(listsSelected:)])
         {
             [delegate listsSelected:self.listsToAddToCurrent];
+        }
+        if([delegate respondsToSelector:@selector(itemsSelectedFromLists:)])
+        {
+            [delegate itemsSelectedFromLists:self.itemsToAddToCurrent];
         }
     }
     [super viewWillDisappear:animated];
