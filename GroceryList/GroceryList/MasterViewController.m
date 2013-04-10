@@ -156,7 +156,7 @@
         
         for (GroceryItem* item in itemsToAdd)
         {
-            [updateList addItem:[item copy]];
+            //[updateList addItem:[item copy]];
         }
         
         [self.databaseHelper updateList:[_currentList copy] items:itemsToAdd];
@@ -166,30 +166,6 @@
 -(void)recipeSelected:(NSMutableArray*)recipes
 {
     [self listsSelected:recipes];
-   /* bool newList = false;
-    for(int i = 0; i < recipes.count; i++)
-    {
-        GroceryList* recipe = recipes[i];
-        if(_currentList == nil)
-        {
-            _currentList = [[GroceryList alloc] init];
-            newList = true;
-        }
-        for(int j = 0; j < recipe.listOfItems.count; j++)
-        {
-            GroceryItem* item = recipe.listOfItems[j];
-            [_currentList addItem:[item copy]];
-        }
-    }
-    //If the Current list is new, add it to the list array to persist it.
-    if(newList)
-    {
-        GroceryList* newGroceryList = [_currentList copy];
-        [_allLists addObject:newGroceryList];
-        NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
-        [listArray addObject:[self addItemsFromList:newGroceryList]];
-        [self.databaseHelper saveLists:listArray whichToSave:@"List"];
-    }*/
 }
 
 //Delegate for adding the recipe items to the list of all items

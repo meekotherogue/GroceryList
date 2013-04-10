@@ -47,7 +47,7 @@
                 {
                     NSLog(@"Error: %s", errMsg);
                 }
-                char* createItem = "CREATE TABLE IF NOT EXISTS Item (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, item_id TEXT)";
+                char* createItem = "CREATE TABLE IF NOT EXISTS Item (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, item_id TEXT, location_name TEXT, venue_id TEXT)";
                 if (sqlite3_exec(groceryDB, createItem, NULL, NULL, &errMsg) != SQLITE_OK)
                 {
                     NSLog(@"Error: %s", errMsg);
@@ -186,9 +186,22 @@
         }
         while (sqlite3_step(loadItemDataStatment) == SQLITE_ROW)
         {
-            NSString* quantity = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 0)];
-            NSString* locationName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 1)];
-            NSString* venueId = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 2)];
+            NSString* quantity = @"";
+            NSString* locationName = @"";
+            NSString* venueId = @"";
+            
+            if(sqlite3_column_text(loadItemDataStatment, 0) != NULL)
+            {
+                quantity = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 0)];
+            }
+            if(sqlite3_column_text(loadItemDataStatment, 1) != NULL)
+            {
+                locationName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 1)];
+            }
+            if(sqlite3_column_text(loadItemDataStatment, 2) != NULL)
+            {
+                venueId = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 2)];
+            }
             
             GroceryItem* item = [[GroceryItem alloc] initWithNameAndQuantity:name quantity:quantity];
             item.locationName = locationName;
@@ -344,7 +357,7 @@
         return NULL;
     }
     
-    NSString* loadItemSQL = [NSString stringWithFormat: @"SELECT name, item_id FROM Item"];
+    NSString* loadItemSQL = [NSString stringWithFormat: @"SELECT name, item_id, location_name, venue_id FROM Item"];
     
     const char *loadItemQuery = [loadItemSQL UTF8String];
     
@@ -356,34 +369,23 @@
     }
     while (sqlite3_step(loadItemStatment) == SQLITE_ROW)
     {
-        sqlite3_stmt* loadItemDataStatment;
         NSString* name = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemStatment, 0)];
         NSString* itemId = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemStatment, 1)];
-        
-        NSString* loadItemDataSQL = [NSString stringWithFormat: @"SELECT quantity, location_name, list_name, venue_id FROM Item_Quantity WHERE item_name=\"%@\"",name];
-        
-        const char *loadItemDataQuery = [loadItemDataSQL UTF8String];
-        
-        if (sqlite3_prepare_v2(groceryDB, loadItemDataQuery, -1, &loadItemDataStatment, NULL) != SQLITE_OK)
+        NSString* venueId = @"";
+        NSString* locationName = @"";
+        if(sqlite3_column_text(loadItemStatment, 2) != NULL)
         {
-            NSLog(@"%s", sqlite3_errmsg(groceryDB));
-            sqlite3_close(groceryDB);
-            return NULL;
+            locationName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemStatment, 2)];
         }
-        while (sqlite3_step(loadItemDataStatment) == SQLITE_ROW)
+        if(sqlite3_column_text(loadItemStatment, 3) != NULL)
         {
-            NSString* quantity = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 0)];
-            NSString* locationName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 1)];
-            NSString* listName = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 2)];
-            NSString* venueId = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemDataStatment, 3)];
-            
-            GroceryItem* item = [[GroceryItem alloc] initWithNameAndQuantity:name quantity:quantity];
-            item.locationName = locationName;
-            item.list = listName;
-            item.venueID = venueId;
-            [items setObject:item forKey:item.key];
+            venueId = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemStatment, 3)];
         }
-        sqlite3_finalize(loadItemDataStatment);
+        
+        GroceryItem* item = [[GroceryItem alloc] initWithName:name];
+        item.locationName = locationName;
+        item.venueID = venueId;
+        [items setObject:item forKey:item.key];
     }
     sqlite3_finalize(loadItemStatment);
     sqlite3_close(groceryDB);
@@ -431,6 +433,27 @@
             return;
         }
     
+        sqlite3_reset(updateItemsStatement);
+        
+        const char *updateItemTableSQL = "update Item Set location_name = ?, venue_id = ? WHERE name = ?";
+        if(sqlite3_prepare_v2(groceryDB, updateItemTableSQL, -1, &updateItemsStatement, NULL) != SQLITE_OK)
+        {
+            NSLog(@"%s", sqlite3_errmsg(groceryDB));
+            sqlite3_close(groceryDB);
+            return;
+        }
+        
+        sqlite3_bind_text(updateItemsStatement, 1, [locationName UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(updateItemsStatement, 2, [venueId UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(updateItemsStatement, 3, [name UTF8String], -1, SQLITE_TRANSIENT);
+        
+        if(sqlite3_step(updateItemsStatement) != SQLITE_DONE)
+        {
+            NSLog(@"%s", sqlite3_errmsg(groceryDB));
+            sqlite3_close(groceryDB);
+            return;
+        }
+        
         sqlite3_reset(updateItemsStatement);
         
     }
