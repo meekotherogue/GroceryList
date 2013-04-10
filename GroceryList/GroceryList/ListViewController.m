@@ -34,10 +34,6 @@
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addList)];
     self.navigationItem.rightBarButtonItem = addButton;
     itemsSelected = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    UISwipeGestureRecognizer *showLocationSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwipe:)];
-    showLocationSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    //[self.tableView addGestureRecognizer:showLocationSwipe];
 }
 
 -(void) viewWillDisappear:(BOOL)animated
@@ -55,37 +51,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)cellSwipe:(UISwipeGestureRecognizer *)gesture
-{
-    CGPoint location = [gesture locationInView:self.tableView];
-    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
-    
-    int index = swipedIndexPath.row;
-    GroceryItem* cell = self.currentList.listOfItems[index];
-    if([cell.venueID length] <= 0)
-    {
-        return;
-    }
-    NSArray* coords = [cell.venueID componentsSeparatedByString: @","];
-    double lat = [coords[0] doubleValue];
-    double lng = [coords[1] doubleValue];
-    
-    NSArray* titles = [cell.locationName componentsSeparatedByString: @" - "];
-    NSString* name = titles[0];
-    NSString* address = @"";
-    if(titles.count > 1)
-    {
-        address = titles[1];
-    }
-    
-    ShowItemLocationViewController* showItemListViewController = [ShowItemLocationViewController alloc];
-    showItemListViewController = [[ShowItemLocationViewController alloc] initWithNibName:@"ShowItemLocationViewController" bundle:nil];
-    [showItemListViewController setLocation:lat longitude:lng name:name address:address];
-    showItemListViewController.delegate = self;
-    
-    [ self.navigationController pushViewController:showItemListViewController animated:YES ];
 }
 
 //Add the list to the current list.
