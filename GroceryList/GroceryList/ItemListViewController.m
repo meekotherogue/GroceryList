@@ -54,10 +54,6 @@
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        // back button was pressed.  We know this is true because self is no longer
-        // in the navigation stack.
-    }
     _rows = 0;
     self.allItems = NULL;
     if([delegate respondsToSelector:@selector(addItems:)])
@@ -120,7 +116,6 @@
     }
     else
     {
-
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
         cell.textLabel.text = item.name;
     }

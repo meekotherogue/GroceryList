@@ -370,7 +370,6 @@
     while (sqlite3_step(loadItemStatment) == SQLITE_ROW)
     {
         NSString* name = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemStatment, 0)];
-        NSString* itemId = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(loadItemStatment, 1)];
         NSString* venueId = @"";
         NSString* locationName = @"";
         if(sqlite3_column_text(loadItemStatment, 2) != NULL)

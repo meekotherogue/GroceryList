@@ -92,7 +92,8 @@
     CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
     
-    GroceryItem* cell = self.currentList.listOfItems[swipedIndexPath.row];
+    int index = swipedIndexPath.row;
+    GroceryItem* cell = self.currentList.listOfItems[index];
     if([cell.venueID length] <= 0)
     {
         return;

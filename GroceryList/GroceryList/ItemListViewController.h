@@ -20,8 +20,6 @@
 @property(nonatomic,assign)GroceryList* currentList;
 @property(nonatomic, strong)NSMutableDictionary* allItems;
 
--(IBAction)backPressed:(id)sender;
-
 @end
 
 

@@ -88,19 +88,20 @@ NSMutableArray* _venues;
 
 - (void)requestDidFinishLoading:(BZFoursquareRequest *)request
 {
-    NSLog(@"%@",request);
     self.meta = request.meta;
     self.notifications = request.notifications;
     self.response = request.response;
     self.request = nil;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
+    //If the request was to get possible check areas, set the venues array.
     if(self.response[@"venues"] != NULL)
     {
         NSMutableArray* venues = self.response[@"venues"];
         _venues = venues;
         [self.tableView reloadData];
     }
+    //If the request was to check in, close the view and display message.
     if([request.path rangeOfString:@"checkin"].location != NSNotFound)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!"
@@ -222,6 +223,7 @@ NSMutableArray* _venues;
 -(void) locationManager: (CLLocationManager *)manager didUpdateToLocation: (CLLocation *) newLocation
            fromLocation: (CLLocation *) oldLocation
 {
+    //If we're not on the simulator, actually get location data
     if (!TARGET_IPHONE_SIMULATOR)
     {
         CLLocation *location = [self.locationManager location];
@@ -230,17 +232,12 @@ NSMutableArray* _venues;
         self.latitude = coordinate.latitude;
         self.longitude = coordinate.longitude;
     }
+    //Otherwise, hardcode for demonstratin purposes.
     else
     {
         self.latitude = 52.115925;
         self.longitude = -106.633753;
     }
 }
-
-- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-
-}
-
 
 @end
