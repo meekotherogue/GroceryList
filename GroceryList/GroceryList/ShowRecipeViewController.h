@@ -11,6 +11,7 @@
 @protocol ShowRecipeDelegate
 @required
 -(void)addRecipe:(GroceryList*)list;
+-(void)addItems:(NSMutableArray*)items;
 @end
 
 

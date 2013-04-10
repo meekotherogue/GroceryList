@@ -12,6 +12,7 @@
 @required
 -(void)recipesAdded:(NSMutableArray*)list;
 -(void)recipeSelected:(NSMutableArray*)recipes;
+-(void)itemsSelectedFromRecipes:(NSMutableArray*)items;
 @end
 
 @interface RecipeListViewController : UIViewController
@@ -21,6 +22,7 @@
 @property (strong, nonatomic) AddRecipeViewController *addRecipeViewController;
 @property(nonatomic, strong)NSMutableArray* allRecipes;
 @property(nonatomic, strong)NSMutableArray* recipesToAddToCurrent;
+@property(nonatomic, strong)NSMutableArray* itemsToAddToCurrent;
 
 -(IBAction)backPressed:(id)sender;
 -(IBAction)addPressed:(id)sender;

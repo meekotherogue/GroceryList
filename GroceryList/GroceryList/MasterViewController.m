@@ -197,6 +197,11 @@
 {
     [self addItems:items];
 }
+//Add items from other recipes delegate
+-(void)itemsSelectedFromRecipes:(NSMutableArray*)items
+{
+    [self addItems:items];
+}
 
 //Foursquare checkin is complete.
 -(void)checkInCompleted:(NSMutableDictionary*)venue

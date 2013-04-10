@@ -9,6 +9,9 @@
 #import "ShowRecipeViewController.h"
 
 @interface ShowRecipeViewController ()
+{
+    NSMutableArray* itemsSelected;
+}
 
 @end
 
@@ -33,6 +36,23 @@
     self.title = self.recipeToShow.name;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    itemsSelected = [[NSMutableArray alloc] initWithCapacity:0];
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+    }
+    
+    self.recipeToShow = NULL;
+    if([delegate respondsToSelector:@selector(addItems:)])
+    {
+        [delegate addItems:itemsSelected];
+    }
+    itemsSelected = NULL;
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,6 +117,24 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    GroceryItem* item = self.recipeToShow.listOfItems[indexPath.row];
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell.accessoryType == UITableViewCellAccessoryCheckmark)
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [itemsSelected removeObject:item];
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [itemsSelected addObject:item];
+    }
 }
 
 

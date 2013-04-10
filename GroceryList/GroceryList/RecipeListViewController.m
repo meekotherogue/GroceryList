@@ -37,6 +37,7 @@ NSMutableArray* _newRecipes;
     _newRecipes = [[NSMutableArray alloc] initWithCapacity:0];
     _rows = self.allRecipes.count;
     self.recipesToAddToCurrent =[[NSMutableArray alloc] initWithCapacity:0];
+    self.itemsToAddToCurrent = [[NSMutableArray alloc] initWithCapacity:0];
     
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPressed:)];
     self.navigationItem.rightBarButtonItem = addButton;
@@ -69,6 +70,10 @@ NSMutableArray* _newRecipes;
         {
             [delegate recipeSelected:self.recipesToAddToCurrent];
         }
+        if([delegate respondsToSelector:@selector(itemsSelectedFromRecipes:)])
+        {
+            [delegate itemsSelectedFromRecipes:self.itemsToAddToCurrent];
+        }
     }
     [super viewWillDisappear:animated];
 }
@@ -86,6 +91,11 @@ NSMutableArray* _newRecipes;
 -(void)addRecipe:(GroceryList*)list
 {
     [self.recipesToAddToCurrent addObject:list];
+}
+
+-(void)addItems:(NSMutableArray*)items
+{
+    [self.itemsToAddToCurrent addObjectsFromArray:items];
 }
 
 -(void)returnLists
