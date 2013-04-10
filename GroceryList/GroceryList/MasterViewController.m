@@ -107,8 +107,8 @@
 //CreateList delegate
 -(void)listCompleted:(GroceryList*)list
 {
-    _currentList = list;
-    [_allLists addObject:list];
+    _currentList = [list copy];
+    [_allLists addObject:[list copy]];
     
     self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
     NSMutableArray* listArray = [[NSMutableArray alloc] initWithCapacity:0];
