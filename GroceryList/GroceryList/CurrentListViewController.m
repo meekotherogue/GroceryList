@@ -105,6 +105,10 @@
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:location];
     
     GroceryItem* cell = self.currentList.listOfItems[swipedIndexPath.row];
+    if([cell.venueID length] <= 0)
+    {
+        return;
+    }
     NSArray* coords = [cell.venueID componentsSeparatedByString: @","];
     double lat = [coords[0] doubleValue];
     double lng = [coords[1] doubleValue];
