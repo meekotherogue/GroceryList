@@ -53,7 +53,8 @@ NSIndexPath* _currentSelection;
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound)
+    {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
         if([delegate respondsToSelector:@selector(listsSelected:)])
@@ -92,6 +93,7 @@ NSIndexPath* _currentSelection;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    //Push the List view of the list selected
     ListViewController* listViewController = [[ListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
     listViewController.delegate = self;
     GroceryList* listToSet = _allLists[indexPath.row];

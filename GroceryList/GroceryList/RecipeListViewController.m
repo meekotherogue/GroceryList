@@ -60,9 +60,8 @@ NSMutableArray* _newRecipes;
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        // back button was pressed.  We know this is true because self is no longer
-        // in the navigation stack.
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound)
+    {
         _rows = 0;
         self.allRecipes = NULL;
         [self returnLists];
@@ -78,7 +77,7 @@ NSMutableArray* _newRecipes;
     [super viewWillDisappear:animated];
 }
 
--(IBAction)addPressed:(id)sender
+-(void)addPressed:(id)sender
 {
     self.addRecipeViewController = NULL;
     self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
@@ -121,7 +120,6 @@ NSMutableArray* _newRecipes;
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
     }
-    NSLog(@"%d",indexPath.row);
     GroceryList* list = self.allRecipes[indexPath.row];
     cell.textLabel.text = list.name;
     
@@ -130,15 +128,8 @@ NSMutableArray* _newRecipes;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[ tableView deselectRowAtIndexPath:indexPath animated:YES ];
-
-    /*if([delegate respondsToSelector:@selector(recipeSelected:)])
-    {
-        [self returnLists];
-        [delegate recipeSelected:indexPath.row];
-    }*/
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    //Show the recipe at the selected table row.
     ShowRecipeViewController* showRecipeViewController = [[ShowRecipeViewController alloc] initWithNibName:@"ShowRecipeViewController" bundle:nil];
     showRecipeViewController.delegate = self;
     GroceryList* recipeToSet = _allRecipes[indexPath.row];

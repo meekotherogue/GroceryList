@@ -43,6 +43,7 @@ UITextField* _nameEntered;
     [addItemButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     _rows = 0;
     
+    //Enable deletion of items
     [self.tableView reloadData];
     self.editing = YES;
 }
@@ -103,6 +104,7 @@ UITextField* _nameEntered;
 }
 //End Actions
 
+//Add to the list of items to send back to add to the Current list.
 -(void)addItem
 {
     [addItemText resignFirstResponder];
@@ -149,17 +151,7 @@ UITextField* _nameEntered;
     }
 }
 
--(void)textFieldDidEndEditing:(UITextField *)sender
-{
-    if([sender isEqual:addItemText] || [sender isEqual:addItemQuant])
-    {
-        //if([ ])
-        //addItemButton.enabled = FALSE;
-    }
-}
-
 //Table methods
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;

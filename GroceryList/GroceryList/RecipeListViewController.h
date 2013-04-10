@@ -24,7 +24,5 @@
 @property(nonatomic, strong)NSMutableArray* recipesToAddToCurrent;
 @property(nonatomic, strong)NSMutableArray* itemsToAddToCurrent;
 
--(IBAction)backPressed:(id)sender;
--(IBAction)addPressed:(id)sender;
 @end
 
