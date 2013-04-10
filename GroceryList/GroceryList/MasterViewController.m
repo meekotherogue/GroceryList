@@ -156,7 +156,7 @@
         
         for (GroceryItem* item in itemsToAdd)
         {
-            //[updateList addItem:[item copy]];
+            [updateList addItem:[item copy]];
         }
         
         [self.databaseHelper updateList:[_currentList copy] items:itemsToAdd];
@@ -365,6 +365,9 @@
     //Show all items
     else if(index == 4)
     {
+        _allItems = [[NSMutableDictionary alloc] initWithCapacity:0];
+        _allItems = [self.databaseHelper loadItems];
+        
         self.itemListViewController = NULL;
         self.itemListViewController = [[ItemListViewController alloc] initWithNibName:@"ItemListViewController" bundle:nil];
         self.itemListViewController.delegate = self;
