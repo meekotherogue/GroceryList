@@ -41,6 +41,9 @@ UITextField* _nameEntered;
     addItemButton.enabled = FALSE;
     [addItemButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     _rows = 0;
+    
+    [self.tableView reloadData];
+    self.editing = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -141,6 +144,26 @@ UITextField* _nameEntered;
 }
 
 //Table methods
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView beginUpdates];
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
+        [arrayOfItems removeItem:indexPath.row];
+        _rows--;
+    }
+    [tableView endUpdates];
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
