@@ -80,7 +80,7 @@ NSMutableArray* _newRecipes;
 -(void)addPressed:(id)sender
 {
     self.addRecipeViewController = NULL;
-    self.addRecipeViewController = [[AddRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
+    self.addRecipeViewController = [[CreateRecipeViewController alloc] initWithNibName:@"AddRecipeViewController" bundle:nil];
     self.addRecipeViewController.delegate = self;
     [self presentViewController:self.addRecipeViewController animated:YES completion:^{
     }];

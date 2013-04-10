@@ -13,8 +13,7 @@
 		5B1C004316E4485E006986BA /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C004116E4485E006986BA /* ListsViewController.xib */; };
 		5B1C004C16E45042006986BA /* RecipeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C004A16E45042006986BA /* RecipeListViewController.m */; };
 		5B1C004D16E45042006986BA /* RecipeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C004B16E45042006986BA /* RecipeListViewController.xib */; };
-		5B1C005116E455C2006986BA /* AddRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1C004F16E455C1006986BA /* AddRecipeViewController.m */; };
-		5B1C005216E455C2006986BA /* AddRecipeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C005016E455C1006986BA /* AddRecipeViewController.xib */; };
+		5B1C005216E455C2006986BA /* CreateRecipeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1C005016E455C1006986BA /* CreateRecipeViewController.xib */; };
 		5B569A8717067F2000F534CA /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B569A8617067F2000F534CA /* ListViewController.m */; };
 		5B87A80916E2CAAC003D7E6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B87A80816E2CAAC003D7E6B /* UIKit.framework */; };
 		5B87A80B16E2CAAC003D7E6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B87A80A16E2CAAC003D7E6B /* Foundation.framework */; };
@@ -51,6 +50,7 @@
 		5BDA90B5171277DF0001BDE3 /* ShowItemLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BDA90B3171277DD0001BDE3 /* ShowItemLocationViewController.xib */; };
 		5BDA90B717127AD40001BDE3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BDA90B617127AD40001BDE3 /* MapKit.framework */; };
 		5BDA90BA1712861D0001BDE3 /* ItemMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA90B91712861D0001BDE3 /* ItemMapAnnotation.m */; };
+		5BDA90BC171521D90001BDE3 /* CreateRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDA90BB171521D70001BDE3 /* CreateRecipeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,9 +63,8 @@
 		5B1C004916E45042006986BA /* RecipeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeListViewController.h; sourceTree = "<group>"; };
 		5B1C004A16E45042006986BA /* RecipeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeListViewController.m; sourceTree = "<group>"; };
 		5B1C004B16E45042006986BA /* RecipeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeListViewController.xib; sourceTree = "<group>"; };
-		5B1C004E16E455C1006986BA /* AddRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRecipeViewController.h; sourceTree = "<group>"; };
-		5B1C004F16E455C1006986BA /* AddRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRecipeViewController.m; sourceTree = "<group>"; };
-		5B1C005016E455C1006986BA /* AddRecipeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddRecipeViewController.xib; sourceTree = "<group>"; };
+		5B1C004E16E455C1006986BA /* CreateRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRecipeViewController.h; sourceTree = "<group>"; };
+		5B1C005016E455C1006986BA /* CreateRecipeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateRecipeViewController.xib; sourceTree = "<group>"; };
 		5B569A8517067F2000F534CA /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		5B569A8617067F2000F534CA /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		5B87A80416E2CAAC003D7E6B /* GroceryList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +119,7 @@
 		5BDA90B617127AD40001BDE3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5BDA90B81712861D0001BDE3 /* ItemMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemMapAnnotation.h; sourceTree = "<group>"; };
 		5BDA90B91712861D0001BDE3 /* ItemMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemMapAnnotation.m; sourceTree = "<group>"; };
+		5BDA90BB171521D70001BDE3 /* CreateRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRecipeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,9 +236,9 @@
 				5B1C004916E45042006986BA /* RecipeListViewController.h */,
 				5B1C004A16E45042006986BA /* RecipeListViewController.m */,
 				5B1C004B16E45042006986BA /* RecipeListViewController.xib */,
-				5B1C004E16E455C1006986BA /* AddRecipeViewController.h */,
-				5B1C004F16E455C1006986BA /* AddRecipeViewController.m */,
-				5B1C005016E455C1006986BA /* AddRecipeViewController.xib */,
+				5B1C004E16E455C1006986BA /* CreateRecipeViewController.h */,
+				5BDA90BB171521D70001BDE3 /* CreateRecipeViewController.m */,
+				5B1C005016E455C1006986BA /* CreateRecipeViewController.xib */,
 				5BBEFE2A16FAAEED001F429F /* ShowRecipeViewController.h */,
 				5BBEFE2B16FAAEED001F429F /* ShowRecipeViewController.m */,
 				5BBEFE2C16FAAEED001F429F /* ShowRecipeViewController.xib */,
@@ -339,7 +339,7 @@
 				5B1C003916E436E4006986BA /* CreateListViewController.xib in Resources */,
 				5B1C004316E4485E006986BA /* ListsViewController.xib in Resources */,
 				5B1C004D16E45042006986BA /* RecipeListViewController.xib in Resources */,
-				5B1C005216E455C2006986BA /* AddRecipeViewController.xib in Resources */,
+				5B1C005216E455C2006986BA /* CreateRecipeViewController.xib in Resources */,
 				5BBEFE2E16FAAEED001F429F /* ShowRecipeViewController.xib in Resources */,
 				5BAA8CF01700081D002F4613 /* ItemListViewController.xib in Resources */,
 				5BDA90A6170BB87F0001BDE3 /* background.png in Resources */,
@@ -363,7 +363,6 @@
 				5B1C003816E436E4006986BA /* CreateListViewController.m in Sources */,
 				5B1C004216E4485E006986BA /* ListsViewController.m in Sources */,
 				5B1C004C16E45042006986BA /* RecipeListViewController.m in Sources */,
-				5B1C005116E455C2006986BA /* AddRecipeViewController.m in Sources */,
 				5BA81F2B16F6CDEC0020A4DC /* GroceryItem.m in Sources */,
 				5BA81F3F16F6D4960020A4DC /* GroceryList.m in Sources */,
 				5BBEFE2D16FAAEED001F429F /* ShowRecipeViewController.m in Sources */,
@@ -375,6 +374,7 @@
 				5BDA90AC170BC72A0001BDE3 /* CheckInViewController.m in Sources */,
 				5BDA90B4171277DF0001BDE3 /* ShowItemLocationViewController.m in Sources */,
 				5BDA90BA1712861D0001BDE3 /* ItemMapAnnotation.m in Sources */,
+				5BDA90BC171521D90001BDE3 /* CreateRecipeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

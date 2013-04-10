@@ -73,19 +73,14 @@
     GroceryItem* item = self.currentList.listOfItems[indexPath.row];
     if([item.locationName length] != 0)
     {
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
         cell.textLabel.text=[NSString stringWithFormat:@"%@ %@",item.quantity,item.name];
         cell.detailTextLabel.text = item.locationName;
     }
     else
     {
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",item.quantity,item.name];
     }
     

@@ -11,7 +11,7 @@
 #import "CurrentListViewController.h"
 #import "ListsViewController.h"
 #import "RecipeListViewController.h"
-#import "AddRecipeViewController.h"
+#import "CreateRecipeViewController.h"
 #import "ShowRecipeViewController.h"
 #import "ItemListViewController.h"
 #import "CheckInViewController.h"

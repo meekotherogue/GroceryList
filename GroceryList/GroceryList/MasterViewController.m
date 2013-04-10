@@ -12,7 +12,7 @@
 #import "CurrentListViewController.h"
 #import "ListsViewController.h"
 #import "RecipeListViewController.h"
-#import "AddRecipeViewController.h"
+#import "CreateRecipeViewController.h"
 #import "GroceryList.h"
 #import "DatabaseHelper.h"
 
@@ -151,6 +151,7 @@
         //Update the List itself
         [self saveNewItemsToExistingList:itemsToAdd];
     }
+    self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
 }
 //RecipesSelected delegate
 -(void)recipeSelected:(NSMutableArray*)recipes
@@ -196,6 +197,7 @@
     {
         [self saveNewItemsToExistingList:items];
     }
+    self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
 }
 //Add items from other lists delegate
 -(void)itemsSelectedFromLists:(NSMutableArray*)items
@@ -223,6 +225,7 @@
     }
     //Update the location of each item in the Current list.
     [self.databaseHelper updateItemsWithLocation:_currentList.listOfItems listName:_currentList.name];
+    self.currentListViewController = [[CurrentListViewController alloc] initWithNibName:@"CurrentListViewController" bundle:nil];
 }
 
 //Helper methods
@@ -263,6 +266,7 @@
     [listArray addObject:[self addItemsFromList:newGroceryList]];
     [self.databaseHelper saveLists:listArray whichToSave:@"List"];
 }
+
 //Save items that were added from other lists to the existing current list.
 -(void)saveNewItemsToExistingList:(NSMutableArray*)itemsToAdd
 {

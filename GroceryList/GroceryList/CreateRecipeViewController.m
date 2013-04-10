@@ -6,18 +6,18 @@
 //  Copyright (c) 2013 Martina Nagy. All rights reserved.
 //
 
-#import "AddRecipeViewController.h"
+#import "CreateRecipeViewController.h"
 #import "GroceryList.h"
 #import "GroceryItem.h"
 
-@interface AddRecipeViewController ()
+@interface CreateRecipeViewController ()
 {
     GroceryList* arrayOfItems;
     int _rows;
 }
 @end
 
-@implementation AddRecipeViewController
+@implementation CreateRecipeViewController
 @synthesize delegate;
 UITextField* _nameEntered;
 

@@ -110,24 +110,18 @@
 {
     static NSString* cellID = @"Cell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-
     GroceryItem* item = allItemsArray[indexPath.row];
     
     if([item.locationName length] != 0)
     {
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
         cell.textLabel.text=[NSString stringWithFormat:@"%@ %@",item.quantity,item.name];
         cell.detailTextLabel.text = item.locationName;
     }
     else
     {
-        if(cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
-        }
+
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewStyleGrouped reuseIdentifier:cellID];
         cell.textLabel.text = item.name;
     }
     

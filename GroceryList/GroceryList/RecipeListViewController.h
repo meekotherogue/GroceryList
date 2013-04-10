@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddRecipeViewController.h"
+#import "CreateRecipeViewController.h"
 @protocol AddRecipeDelegate
 @required
 -(void)recipesAdded:(NSMutableArray*)list;
@@ -19,7 +19,7 @@
 
 @property(nonatomic,assign)id delegate;
 @property(nonatomic, strong) IBOutlet UITableView* tableView;
-@property (strong, nonatomic) AddRecipeViewController *addRecipeViewController;
+@property (strong, nonatomic) CreateRecipeViewController *addRecipeViewController;
 @property(nonatomic, strong)NSMutableArray* allRecipes;
 @property(nonatomic, strong)NSMutableArray* recipesToAddToCurrent;
 @property(nonatomic, strong)NSMutableArray* itemsToAddToCurrent;
